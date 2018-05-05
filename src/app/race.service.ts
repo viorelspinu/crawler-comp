@@ -10,13 +10,15 @@ export class RaceService {
 
   constructor() { }
 
-  addMistake(mistake: Mistake) {
+  addMistake(mistake: Mistake): void {
     this.mistakes.push(mistake);
     this.missPoints = this.missPoints + mistake.points;
   }
 
-  removeLastMistake(){
-    let lastMistake = this.mistakes.pop();
-    this.missPoints = this.missPoints - lastMistake.points;
+  removeLastMistake(): void {
+    if (this.mistakes.length > 0) {
+      let lastMistake = this.mistakes.pop();
+      this.missPoints = this.missPoints - lastMistake.points;
+    }
   }
 }

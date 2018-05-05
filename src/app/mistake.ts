@@ -1,10 +1,12 @@
 
 export class Mistake {
+    id: number;
     points: number;
-    type: string;
+    name: string;
 
-    constructor(points : number, type:string) {
+    constructor(id: number, points: number, name: string) {
         this.points = points;
-        this.type = type;
-     }
+        this.name = name;
+        this.id = id;
+    }
 }

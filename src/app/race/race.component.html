@@ -7,21 +7,13 @@
 <br>
 <br>
 
-<button class="button" (click)="addMistake(1, 'revers');">
-    Revers (+1)
-</button>
-<button class="button" (click)="addMistake(5, 'rollover');">
-    Rollover (+5)
-</button>
-<button class="button" (click)="addMistake(5, 'gate');">
-    Gate (+5)
-</button>
-<button class="button" (click)="addMistake(5, 'touch');">
-    Vehicle Touch (+5)
-</button>
-<button class="button" (click)="addMistake(10, 'repositioning');">
-    Repositioning (+10)
-</button>
+<span *ngFor='let mistake of mistakeService.mistakeTypes; '>
+
+    <button class="button" (click)="addMistake(mistake.id, mistake.points, mistake.name);">
+        {{mistake.name}} ({{mistake.points}})
+    </button>
+
+</span>
 
 <div>{{raceService.missPoints}}</div>
-<div *ngFor='let mistake of raceService.mistakes'> {{mistake.type}} </div>
+<div *ngFor='let mistake of raceService.mistakes'> {{mistake.name}} : {{mistake.points}}</div>

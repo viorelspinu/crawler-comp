@@ -1,0 +1,7 @@
+[
+{"id":1,"points":1, "name": "reverse"}, 
+{"id":2,"points":5, "name": "rollover"},
+{"id":3,"points":5, "name": "gate"},
+{"id":4,"points":5, "name": "touch"},
+{"id":5,"points":10, "name": "reposition"}
+]
