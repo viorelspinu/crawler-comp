@@ -11,6 +11,10 @@ module.exports = {
             dao.getAllPilots(res);  
         });  
 
+        app.get('/api/tournament', function (req, res) {  
+            dao.getAllTournaments(res);  
+        });  
+
   
     }  
 };  

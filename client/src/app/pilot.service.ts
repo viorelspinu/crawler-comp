@@ -7,7 +7,7 @@ import { Pilot } from './pilot';
   providedIn: 'root'
 })
 export class PilotService {
-  private pilotsUrl = '/assets/pilots.json';
+  private pilotsUrl = 'http://ec2-34-205-125-209.compute-1.amazonaws.com:8000/api/pilot';
 
   constructor(private http: HttpClient) {}
 
