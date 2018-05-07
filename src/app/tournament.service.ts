@@ -11,18 +11,11 @@ export class TournamentService {
 
   private tournamentsUrl = '';
 
-  closedTournaments : Tournament[];
-  inProgressTournaments : Tournament[];
-
   constructor(private http: HttpClient) { 
 
   }
 
-  initTournaments(): void {
-    //this.loadMistakeTypes().subscribe(mistakes => this.mistakeTypes = mistakes);
-  }
-
-  loadTournaments(): Observable<Tournament[]> {
+  getTournaments(): Observable<Tournament[]> {
     return this.http.get<Tournament[]>(this.tournamentsUrl);
   }
 }
