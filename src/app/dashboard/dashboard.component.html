@@ -1,3 +1,11 @@
-<p>
-  dashboard works!
-</p>
+<div>
+  <b>In Progress Tournaments</b>
+</div>
+
+<div *ngFor='let tournament of inProgressTournaments'> {{tournament.name}}</div>
+
+<br><br><br>
+<div>
+  <b>Finished Tournaments</b>
+</div>
+<div *ngFor='let tournament of closedTournaments'> {{tournament.name}}</div>

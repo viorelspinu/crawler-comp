@@ -1,0 +1,33 @@
+<div *ngIf="!newTournamentCreated">
+  <br>
+
+  <br> New tournament name :
+  <input [(ngModel)]="tournamentName" placeholder="name" />
+  <br><br>
+
+  <button (click)="saveNewTournament()">Create New Tournament</button>
+
+  <br>
+  <br>
+</div>
+
+<div *ngIf="newTournamentCreated">
+  <br>
+  <br>
+  <button (click)="beginTournament()">Begin Tournament</button>
+
+
+
+  <br>
+  <br> Pilots for <b>
+    {{tournamentName}}
+  </b>
+  <br>
+  <br>
+  <input [(ngModel)]="pilotName" placeholder="name" />
+  <button (click)="addNewPilot()">Add Pilot</button>
+  <br>
+  <br>
+
+  <div *ngFor='let pilot of pilots'> {{pilot}}</div>
+</div>

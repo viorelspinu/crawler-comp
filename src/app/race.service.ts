@@ -6,9 +6,9 @@ import { Mistake } from './mistake';
 })
 export class RaceService {
   mistakes: Mistake[] = [];
-  missPoints: number = 0;
+  missPoints = 0;
 
-  constructor() { }
+  constructor() {}
 
   addMistake(mistake: Mistake): void {
     this.mistakes.push(mistake);
@@ -17,7 +17,7 @@ export class RaceService {
 
   removeLastMistake(): void {
     if (this.mistakes.length > 0) {
-      let lastMistake = this.mistakes.pop();
+      const lastMistake = this.mistakes.pop();
       this.missPoints = this.missPoints - lastMistake.points;
     }
   }

@@ -8,20 +8,19 @@ import { Tournament } from '../tournament';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  closedTournaments: Tournament[] = [];
+  inProgressTournaments: Tournament[] = [];
 
-  closedTournaments: Tournament[];
-  inProgressTournaments: Tournament[];
-
-  constructor(private tournamentService: TournamentService) { }
+  constructor(private tournamentService: TournamentService) {}
 
   ngOnInit() {
     this.loadTournaments();
   }
 
   loadTournaments(): void {
-    console.log("loadTournaments");
+    console.log('loadTournaments');
     this.tournamentService.getTournaments().subscribe(tournaments => {
-      for (let tournament of tournaments) {
+      for (const tournament of tournaments) {
         if (tournament.finished) {
           this.closedTournaments.push(tournament);
         } else {

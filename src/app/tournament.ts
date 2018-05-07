@@ -1,6 +1,6 @@
 export class Tournament {
-    id : number;
-    name : string;
-    date: string;
-    finished : boolean;
+  id: number;
+  name: string;
+  date: string;
+  finished: boolean;
 }

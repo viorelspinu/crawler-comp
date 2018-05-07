@@ -8,14 +8,17 @@ import { Tournament } from './tournament';
   providedIn: 'root'
 })
 export class TournamentService {
+  private tournamentsUrl = '/assets/tournaments.json';
+  private activeTournamentsUrl = '/assets/active-tournament.json';
 
-  private tournamentsUrl = '';
 
-  constructor(private http: HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) {}
 
   getTournaments(): Observable<Tournament[]> {
     return this.http.get<Tournament[]>(this.tournamentsUrl);
+  }
+
+  getActiveTournament(): Observable<Tournament> {
+    return this.http.get<Tournament>(this.activeTournamentsUrl);
   }
 }

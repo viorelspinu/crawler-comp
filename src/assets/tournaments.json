@@ -1,0 +1,7 @@
+[
+{"id":1,"name": "comp 1", "date": "1/1/2018", "finished" : false},
+{"id":2,"name": "comp 2", "date": "1/1/2018", "finished" : true},
+{"id":3,"name": "comp 3", "date": "1/1/2018", "finished" : true},
+{"id":4,"name": "comp 4", "date": "1/1/2018", "finished" : true},
+{"id":5,"name": "comp 5", "date": "1/1/2018", "finished" : true}
+]
