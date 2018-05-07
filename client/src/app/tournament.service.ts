@@ -8,7 +8,7 @@ import { Tournament } from './tournament';
   providedIn: 'root'
 })
 export class TournamentService {
-  private tournamentsUrl = '/assets/tournaments.json';
+  private tournamentsUrl = 'http://ec2-34-205-125-209.compute-1.amazonaws.com:8000/api/tournament';
   private activeTournamentsUrl = '/assets/active-tournament.json';
 
 
