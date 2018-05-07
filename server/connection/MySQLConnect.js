@@ -17,10 +17,9 @@ this.init = function() {
 };  
 
 // acquire connection and execute query on callbacks  
-this.acquire = function(callback) {  
-
+this.acquire = function(callback) { 
   this.pool.getConnection(function(err, connection) {  
-    callback(err, connection);  
+    callback(err, connection); 
   });  
 
 };  
