@@ -1,0 +1,15 @@
+CREATE TABLE tournament (
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+create_date TIMESTAMP,
+finished boolean
+)
+
+
+CREATE TABLE pilot (
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+tournament_id INT(6)
+)
+
+
