@@ -9,9 +9,9 @@ this.pool = null;
 this.init = function() {  
   this.pool = mysql.createPool({  
     connectionLimit: 10,  
-    host     : 'localhost',  
+    host     : 'prod.cwpbzfdpgbc8.us-east-1.rds.amazonaws.com',  
     user     : 'root',  
-    password : 'parola',  
+    password : 'parola123',  
     database: 'crawler_db'  
   });  
 };  
