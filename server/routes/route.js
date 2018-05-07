@@ -1,5 +1,5 @@
 //custom route for fetching data  
-var pilotDao = require('../data_access/transaction');  
+var dao = require('../data_access/dao');  
   
 module.exports = {  
     //set up route configuration that will be handle by express server  
@@ -8,7 +8,7 @@ module.exports = {
         // adding route for users, here app is express instance which provide use  
         // get method for handling get request from http server.   
         app.get('/api/pilot', function (req, res) {  
-            pilotDao.getAllPilots(res);  
+            dao.getAllPilots(res);  
         });  
 
   

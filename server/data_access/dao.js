@@ -1,7 +1,7 @@
 //methods for fetching mysql data  
 var connection = require('../connection/MySQLConnect');  
 
-function PilotDao() { 
+function Dao() { 
 
 
   this.getAllPilots = function (res) {  
@@ -19,4 +19,4 @@ function PilotDao() {
 
 }  
 
-module.exports = new PilotDao();  
+module.exports = new Dao();  
