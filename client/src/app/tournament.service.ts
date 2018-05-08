@@ -14,6 +14,7 @@ export class TournamentService {
   private activeTournamentsUrl = '/api/tournament/active';
 
   activeTournament: Tournament;
+  stillAddingPilots = true;
 
   constructor(
     private http: HttpClient,

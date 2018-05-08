@@ -17,7 +17,7 @@
   <br> Pilots for <b>
     {{tournamentService.activeTournament.name}}
   </b>
-  <div *ngIf="showAddPilots">
+  <div *ngIf="tournamentService.stillAddingPilots">
     <br>
     <br>
     <input (keydown)="keydownOnPilotText($event)" id="pilotName" [(ngModel)]="pilotName" placeholder="name" />

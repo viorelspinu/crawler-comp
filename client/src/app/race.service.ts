@@ -12,7 +12,7 @@ import { ConfigurationService } from './configuration.service';
 })
 export class RaceService {
   mistakes: MistakeType[] = [];
-  missPoints = 0;
+  mistakePoints = 0;
   activePilot: Pilot;
   raceIndex = 0;
 
@@ -29,7 +29,7 @@ export class RaceService {
 
   addMistake(mistakeType: MistakeType): void {
     this.mistakes.push(mistakeType);
-    this.missPoints = this.missPoints + mistakeType.points;
+    this.mistakePoints = this.mistakePoints + mistakeType.points;
 
     this.mistakeService
       .saveMistake(
@@ -44,7 +44,7 @@ export class RaceService {
   removeLastMistake(): void {
     if (this.mistakes.length > 0) {
       const lastMistake = this.mistakes.pop();
-      this.missPoints = this.missPoints - lastMistake.points;
+      this.mistakePoints = this.mistakePoints - lastMistake.points;
     }
   }
 }

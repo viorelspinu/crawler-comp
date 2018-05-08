@@ -15,7 +15,6 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   tournamentName: string;
   pilotName: string;
   newTournamentCreated = -1;
-  showAddPilots = true;
   pilots: Pilot[] = [];
 
   constructor(
@@ -44,7 +43,7 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
       this.renderer2.selectRootElement('#tournamentName').focus();
     }
     if (this.newTournamentCreated === 1) {
-      if (this.showAddPilots) {
+      if (this.tournamentService.stillAddingPilots) {
         this.renderer2.selectRootElement('#pilotName').focus();
       }
     }
@@ -57,7 +56,7 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   }
 
   setShowAddPilots(state: boolean): void {
-    this.showAddPilots = state;
+    this.tournamentService.stillAddingPilots = state;
   }
 
   addNewPilot(): void {
