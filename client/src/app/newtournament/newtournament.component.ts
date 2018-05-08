@@ -12,6 +12,7 @@ import { Tournament } from '../tournament';
 })
 export class NewtournamentComponent implements OnInit, AfterViewChecked {
   tournamentName: string;
+  activeTournament : Tournament;
   pilotName: string;
   newTournamentCreated = false;
   pilots: string[] = [];
@@ -45,9 +46,11 @@ export class NewtournamentComponent implements OnInit, AfterViewChecked {
       return;
     }
     this.tournamentService.saveTournament(this.tournamentName).subscribe(t => {
+      this.newTournamentCreated = true;
+      this.activeTournament = t;
       console.log(t);
     });
-    this.newTournamentCreated = true;
+
   }
 
   beginTournament(): void {

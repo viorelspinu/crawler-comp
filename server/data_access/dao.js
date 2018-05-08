@@ -24,7 +24,11 @@ function Dao() {
 
   this.saveTournament = function(req, res) {
     connection.acquire(function(err, con) {
-      con.query('SELECT * FROM tournament LIMIT 1', function(err, result) {
+      let name = req.body.tournamentName;
+      con.query('INSERT INTO tournament(name) VALUES(?)', [name], function(
+        err,
+        result
+      ) {
         con.release();
         res.send(result);
       });
