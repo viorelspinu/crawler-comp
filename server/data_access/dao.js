@@ -13,26 +13,59 @@ function Dao() {
     });
   };
 
+  this.getTournamentById = function(res) {
+    let id = req.body.id;
+    connection.acquire(function(err, con) {
+      con.query('SELECT * FROM tournament WHERE id = ?', [id], function(
+        err,
+        result
+      ) {
+        con.release();
+        console.log(result);
+        res.send(result);
+      });
+    });
+  };
+
   this.getAllTournaments = function(res) {
     connection.acquire(function(err, con) {
       con.query('SELECT * FROM tournament', function(err, result) {
         con.release();
+        console.log(result);
         res.send(result);
       });
+    });
+  };
+
+  this.getActiveTournament = function(res) {
+    connection.acquire(function(err, con) {
+      con.query(
+        'SELECT * FROM tournament WHERE finished=FALSE LIMIT 1',
+        function(err, result) {
+          con.release();
+          console.log(result);
+          res.send(result);
+        }
+      );
     });
   };
 
   this.saveTournament = function(req, res) {
     connection.acquire(function(err, con) {
       let name = req.body.tournamentName;
-      con.query('INSERT INTO tournament(name) VALUES(?)', [name], function(
-        err,
-        result
-      ) {        
-        con.release();
-        if (err) throw err;
-        res.send(result);
-      });
+      let finished = false;
+
+      con.query(
+        'INSERT INTO tournament(name, finished, create_date) VALUES(?, ?, NOW())',
+        [name, finished],
+        function(err, result) {
+          let insertId = result.insertId;
+          console.log(insertId);
+          con.release();
+          if (err) throw err;
+          res.send(insertId.toString());
+        }
+      );
     });
   };
 }

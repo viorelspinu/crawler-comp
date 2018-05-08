@@ -1,4 +1,9 @@
-<h1>{{title}}</h1>
+<br><br><br>
+<div *ngIf="tournamentService.activeTournament">
+  Active Tournament : {{tournamentService.activeTournament.name}}
+</div>
+<br><br><br>
+
 <nav>
   <a routerLink="/dashboard">Home</a>&nbsp;&nbsp;&nbsp;
   <a routerLink="/tournament">Active Tournament</a>&nbsp;&nbsp;&nbsp;

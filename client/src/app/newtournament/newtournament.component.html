@@ -1,4 +1,4 @@
-<div *ngIf="!newTournamentCreated">
+<div *ngIf="newTournamentCreated === 0">
   <br>
 
   <br> New tournament name :
@@ -11,23 +11,30 @@
   <br>
 </div>
 
-<div *ngIf="newTournamentCreated">
-  <br>
-  <br>
-  <button (click)="beginTournament()">Begin Tournament</button>
-
-
+<div *ngIf="newTournamentCreated === 1">
 
   <br>
   <br> Pilots for <b>
-    {{tournamentName}}
+    {{tournamentService.activeTournament.name}}
   </b>
-  <br>
-  <br>
-  <input id="pilotName" [(ngModel)]="pilotName" placeholder="name" />
-  <button (click)="addNewPilot()">Add Pilot</button>
+  <div *ngIf="showAddPilots">
+    <br>
+    <br>
+    <input (keydown)="keydownOnPilotText($event)" id="pilotName" [(ngModel)]="pilotName" placeholder="name" />
+    <button (click)="addNewPilot()">Add Pilot</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button (click)="setShowAddPilots(false)">Done Adding Pilots</button>
+    <br>
+    <br>
+  </div>
   <br>
   <br>
 
+
   <div *ngFor='let pilot of pilots'> {{pilot}}</div>
+
+  <div *ngIf="!showAddPilots">
+    <br><br><br><br>
+    <button (click)="setShowAddPilots(true)">Add More Pilots</button>
+  </div>
+
 </div>

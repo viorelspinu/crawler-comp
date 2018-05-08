@@ -12,9 +12,9 @@ import { Tournament } from '../tournament';
 })
 export class NewtournamentComponent implements OnInit, AfterViewChecked {
   tournamentName: string;
-  activeTournament : Tournament;
   pilotName: string;
-  newTournamentCreated = false;
+  newTournamentCreated = -1;
+  showAddPilots = true;
   pilots: string[] = [];
 
   constructor(
@@ -23,14 +23,35 @@ export class NewtournamentComponent implements OnInit, AfterViewChecked {
     private renderer2: Renderer2
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tournamentService.getActiveTournament().subscribe(t => {
+      if (this.tournamentService.activeTournament) {
+        this.newTournamentCreated = 1;
+      } else {
+        this.newTournamentCreated = 0;
+      }
+    });
+  }
 
   ngAfterViewChecked() {
-    if (!this.newTournamentCreated) {
+    if (this.newTournamentCreated === 0) {
       this.renderer2.selectRootElement('#tournamentName').focus();
-    } else {
-      this.renderer2.selectRootElement('#pilotName').focus();
     }
+    if (this.newTournamentCreated === 1) {
+      if (this.showAddPilots) {
+        this.renderer2.selectRootElement('#pilotName').focus();
+      }
+    }
+  }
+
+  keydownOnPilotText(event): void {
+    if (event.keyCode === 13) {
+      this.addNewPilot();
+    }
+  }
+
+  setShowAddPilots(state: boolean): void {
+    this.showAddPilots = state;
   }
 
   addNewPilot(): void {
@@ -45,12 +66,12 @@ export class NewtournamentComponent implements OnInit, AfterViewChecked {
     if (!this.tournamentName) {
       return;
     }
-    this.tournamentService.saveTournament(this.tournamentName).subscribe(t => {
-      this.newTournamentCreated = true;
-      this.activeTournament = t;
-      console.log(t);
-    });
 
+    this.tournamentService.saveTournament(this.tournamentName).subscribe(t => {
+      this.tournamentService
+        .getActiveTournament()
+        .subscribe(t1 => (this.newTournamentCreated = 1));
+    });
   }
 
   beginTournament(): void {

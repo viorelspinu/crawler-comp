@@ -10,6 +10,10 @@ module.exports = {
     app.get('/api/tournament', function(req, res) {
       dao.getAllTournaments(res);
     });
+    
+    app.get('/api/tournament/active', function(req, res) {
+      dao.getActiveTournament(res);
+    });
 
     app.post('/api/tournament', function(req, res) {
       dao.saveTournament(req, res);
