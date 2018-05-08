@@ -28,8 +28,9 @@ function Dao() {
       con.query('INSERT INTO tournament(name) VALUES(?)', [name], function(
         err,
         result
-      ) {
+      ) {        
         con.release();
+        if (err) throw err;
         res.send(result);
       });
     });
