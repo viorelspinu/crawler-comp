@@ -5,16 +5,18 @@ function MySQLConnect() {
 
 this.pool = null;  
   
-// Init MySql Connection Pool  
+
 this.init = function() {  
   this.pool = mysql.createPool({  
     connectionLimit: 10,  
-    host     : 'prod.cwpbzfdpgbc8.us-east-1.rds.amazonaws.com',  
-    user     : 'root',  
-    password : 'parola123',  
-    database: 'crawler_db'  
+    host     : process.env.DB_URL,  
+    user     : process.env.DB_USER,  
+    password : process.env.DB_PASSWORD,  
+    database: process.env.DB_NAME  
   });  
 };  
+
+console.log("session secret is:", );
 
 // acquire connection and execute query on callbacks  
 this.acquire = function(callback) { 

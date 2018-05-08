@@ -19,6 +19,9 @@ app.use(bodyparser.urlencoded({ extended : true}));
 app.use(bodyparser.json());
 
 routes.configure(app);  
+
+
+
   
 var server = app.listen(8000, function(){  
     console.log('Server Listening on port ' + server.address().port);  

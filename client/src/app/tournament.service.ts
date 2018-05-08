@@ -11,7 +11,6 @@ export class TournamentService {
   private tournamentsUrl = 'http://ec2-34-205-125-209.compute-1.amazonaws.com:8000/api/tournament';
   private activeTournamentsUrl = '/assets/active-tournament.json';
 
-
   constructor(private http: HttpClient) {}
 
   getTournaments(): Observable<Tournament[]> {
@@ -20,5 +19,9 @@ export class TournamentService {
 
   getActiveTournament(): Observable<Tournament> {
     return this.http.get<Tournament>(this.activeTournamentsUrl);
+  }
+
+  saveTournament(tournamentName: string): Observable<Tournament> {
+    return this.http.post<Tournament>(this.tournamentsUrl, tournamentName);
   }
 }
