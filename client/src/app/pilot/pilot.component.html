@@ -1,3 +1,6 @@
-<p>
-  pilot works!
-</p>
+<div *ngIf="pilot">
+  {{pilot.id}} - {{pilot.name}}
+  <br>
+  <br>
+  <button (click)="startTryForThisPilot()">New try for this pilot</button>
+</div>

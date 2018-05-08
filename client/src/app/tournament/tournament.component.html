@@ -30,7 +30,14 @@
   <br>
 
 
-  <div *ngFor='let pilot of pilots'> {{pilot}}</div>
+  <div *ngFor='let pilot of pilots.reverse()' style='width:300px;'>
+    id:{{pilot.id}} -
+    <a routerLink="/pilot/{{pilot.id}}">
+      {{pilot.name}}     
+    </a> 
+    &nbsp;&nbsp;
+    tries : {{pilot.lastRaceIndex}}
+  </div>
 
   <div *ngIf="!showAddPilots">
     <br><br><br><br>

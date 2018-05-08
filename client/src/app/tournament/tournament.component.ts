@@ -4,6 +4,7 @@ import { Renderer2 } from '@angular/core';
 import { PilotService } from '../pilot.service';
 import { TournamentService } from '../tournament.service';
 import { Tournament } from '../tournament';
+import { Pilot } from '../pilot';
 
 @Component({
   selector: 'app-tournament',
@@ -15,7 +16,7 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   pilotName: string;
   newTournamentCreated = -1;
   showAddPilots = true;
-  pilots: string[] = [];
+  pilots: Pilot[] = [];
 
   constructor(
     private pilotService: PilotService,
@@ -26,7 +27,12 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.tournamentService.getActiveTournament().subscribe(t => {
       if (this.tournamentService.activeTournament) {
-        this.newTournamentCreated = 1;
+        this.pilotService
+          .getPilots(this.tournamentService.activeTournament.id)
+          .subscribe(pilots => {
+            this.pilots = pilots;
+            this.newTournamentCreated = 1;
+          });
       } else {
         this.newTournamentCreated = 0;
       }
@@ -61,7 +67,7 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
     this.pilotService
       .savePilot(this.pilotName, this.tournamentService.activeTournament.id)
       .subscribe(t => {
-        this.pilots.push(this.pilotName);
+        this.pilots.push(new Pilot(t, this.pilotName, 0));
         this.pilotName = '';
       });
   }

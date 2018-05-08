@@ -1,5 +1,5 @@
 
-export class Mistake {
+export class MistakeType {
     id: number;
     points: number;
     name: string;

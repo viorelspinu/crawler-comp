@@ -1,9 +1,14 @@
+<br>
+<div *ngIf="raceService.activePilot.name">
+    <br> Try number <b>{{raceService.activePilot.lastRaceIndex}}</b> for pilot : <b>{{raceService.activePilot.name}}</b>
+</div>
+<br>
+<br>
+
 <button class="button" (click)="removeLastMistake();">
     UNDO
 </button>
 
-<br>
-<br>
 <br>
 <br>
 

@@ -1,26 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Mistake } from './mistake';
+import { MistakeType } from './mistaketype';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MistakeService {
+  private mistakeTypeUrl = '/api/mistake-type';
+  private mistakeUrl = '/api/mistake';
 
-  private mistakesUrl = '/assets/mistakes.json';
+  mistakeTypes: MistakeType[] = [];
 
-  mistakeTypes: Mistake[] = [];
-
-  constructor(private http: HttpClient) {
-    this.initMistakes();
+  constructor(
+    private http: HttpClient,
+    private configurationService: ConfigurationService
+  ) {
+    this.mistakeTypeUrl =
+      this.configurationService.baseURL + this.mistakeTypeUrl;
+    this.mistakeUrl = this.configurationService.baseURL + this.mistakeUrl;
+    this.initMistakeTypes();
   }
 
-  initMistakes(): void {
-    this.loadMistakeTypes().subscribe(mistakes => this.mistakeTypes = mistakes);
+  initMistakeTypes(): void {
+    this.http
+      .get<MistakeType[]>(this.mistakeTypeUrl)
+      .subscribe(mistakeTypes => (this.mistakeTypes = mistakeTypes));
   }
 
-  loadMistakeTypes(): Observable<Mistake[]> {
-    return this.http.get<Mistake[]>(this.mistakesUrl);
+  saveMistake(
+    mistakeTypeId: number,
+    pilotId: number,
+    tournamentId: number,
+    raceId: number
+  ): Observable<number> {
+    return this.http.post<number>(this.mistakeUrl, {
+      mistakeTypeId: mistakeTypeId,
+      tournamentId: tournamentId,
+      pilotId: pilotId,
+      raceId: raceId
+    });
   }
 }

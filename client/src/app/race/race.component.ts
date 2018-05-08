@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RaceService } from '../race.service';
-import { Mistake } from '../mistake';
+import { MistakeType } from '../mistaketype';
 import { MistakeService } from '../mistake.service';
+import { Pilot } from '../pilot';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-race',
@@ -11,13 +14,19 @@ import { MistakeService } from '../mistake.service';
 export class RaceComponent implements OnInit {
   constructor(
     private raceService: RaceService,
-    private mistakeService: MistakeService
+    private mistakeService: MistakeService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.raceService.activePilot) {
+      this.router.navigateByUrl('/tournament');
+    }
+  }
 
   addMistake(id: number, points: number, name: string): void {
-    this.raceService.addMistake(new Mistake(id, points, name));
+    this.raceService.addMistake(new MistakeType(id, points, name));
   }
 
   removeLastMistake(): void {

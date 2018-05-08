@@ -21,7 +21,19 @@ function Dao() {
         result
       ) {
         con.release();
-        console.log(result);
+        res.send(result);
+      });
+    });
+  };
+
+  this.getPilotById = function(req, res) {
+    let id = req.params.id;
+    connection.acquire(function(err, con) {
+      con.query('SELECT * FROM pilot WHERE id = ?', [id], function(
+        err,
+        result
+      ) {
+        con.release();
         res.send(result);
       });
     });
@@ -31,7 +43,15 @@ function Dao() {
     connection.acquire(function(err, con) {
       con.query('SELECT * FROM tournament', function(err, result) {
         con.release();
-        console.log(result);
+        res.send(result);
+      });
+    });
+  };
+
+  this.getAllMistakeTypes = function(res) {
+    connection.acquire(function(err, con) {
+      con.query('SELECT * FROM mistake_type', function(err, result) {
+        con.release();
         res.send(result);
       });
     });
@@ -60,7 +80,6 @@ function Dao() {
         [name, finished],
         function(err, result) {
           let insertId = result.insertId;
-          console.log(insertId);
           con.release();
           if (err) throw err;
           res.send(insertId.toString());
@@ -75,11 +94,47 @@ function Dao() {
       let tournamentId = req.body.tournamentId;
 
       con.query(
-        'INSERT INTO pilot(name, tournament_id) VALUES(?, ?)',
+        'INSERT INTO pilot(name, tournament_id, last_race_index) VALUES(?, ?, 0)',
         [name, tournamentId],
         function(err, result) {
           let insertId = result.insertId;
-          console.log(insertId);
+          con.release();
+          if (err) throw err;
+          res.send(insertId.toString());
+        }
+      );
+    });
+  };
+
+  this.patchPilot = function(req, res) {
+    let id = req.params.id;
+    let lastRaceIndex = req.body.lastRaceIndex;
+    connection.acquire(function(err, con) {
+      con.query(
+        'UPDATE pilot SET lastRaceIndex=? WHERE id = ?',
+        [lastRaceIndex, id],
+        function(err, result) {
+          con.release();
+          res.send(result);
+        }
+      );
+    });
+  };
+
+  this.saveMistake = function(req, res) {
+    connection.acquire(function(err, con) {
+      let mistakeTypeId = req.body.mistakeTypeId;
+      let pilotId = req.body.pilotId;
+      let tournamentId = req.body.tournamentId;
+      let raceId = req.body.raceId;
+
+      console.log(raceId);
+
+      con.query(
+        'INSERT INTO mistake(mistake_type_id, tournament_id, pilot_id, race_index) VALUES(?, ?, ?, ?)',
+        [mistakeTypeId, tournamentId, pilotId, raceId],
+        function(err, result) {
+          let insertId = result.insertId;
           con.release();
           if (err) throw err;
           res.send(insertId.toString());

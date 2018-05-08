@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Mistake } from './mistake';
+import { MistakeType } from './mistaketype';
 import { Tournament } from './tournament';
 import { ConfigurationService } from './configuration.service';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -37,8 +37,8 @@ export class TournamentService {
     );
   }
 
-  saveTournament(tournamentName: string): Observable<Tournament[]> {
-    return this.http.post<Tournament[]>(this.tournamentsUrl, {
+  saveTournament(tournamentName: string): Observable<number> {
+    return this.http.post<number>(this.tournamentsUrl, {
       tournamentName: tournamentName
     });
   }
