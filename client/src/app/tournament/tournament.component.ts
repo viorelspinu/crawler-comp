@@ -58,8 +58,12 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
     if (!this.pilotName) {
       return;
     }
-    this.pilots.push(this.pilotName);
-    this.pilotName = '';
+    this.pilotService
+      .savePilot(this.pilotName, this.tournamentService.activeTournament.id)
+      .subscribe(t => {
+        this.pilots.push(this.pilotName);
+        this.pilotName = '';
+      });
   }
 
   saveNewTournament(): void {

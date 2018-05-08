@@ -68,6 +68,25 @@ function Dao() {
       );
     });
   };
+
+  this.savePilot = function(req, res) {
+    connection.acquire(function(err, con) {
+      let name = req.body.pilotName;
+      let tournamentId = req.body.tournamentId;
+
+      con.query(
+        'INSERT INTO pilot(name, tournament_id) VALUES(?, ?)',
+        [name, tournamentId],
+        function(err, result) {
+          let insertId = result.insertId;
+          console.log(insertId);
+          con.release();
+          if (err) throw err;
+          res.send(insertId.toString());
+        }
+      );
+    });
+  };
 }
 
 module.exports = new Dao();

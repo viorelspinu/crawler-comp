@@ -18,5 +18,9 @@ module.exports = {
     app.post('/api/tournament', function(req, res) {
       dao.saveTournament(req, res);
     });
+
+    app.post('/api/pilot', function(req, res) {
+      dao.savePilot(req, res);
+    });
   }
 };
