@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RaceComponent } from './race/race.component';
-import { NewtournamentComponent } from './newtournament/newtournament.component';
+import { TournamentComponent } from './tournament/tournament.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'race', component: RaceComponent },
-  { path: 'tournament', component: NewtournamentComponent }
+  { path: 'tournament', component: TournamentComponent }
 ];
 
 @NgModule({

@@ -6,11 +6,11 @@ import { TournamentService } from '../tournament.service';
 import { Tournament } from '../tournament';
 
 @Component({
-  selector: 'app-newtournament',
-  templateUrl: './newtournament.component.html',
-  styleUrls: ['./newtournament.component.css']
+  selector: 'app-tournament',
+  templateUrl: './tournament.component.html',
+  styleUrls: ['./tournament.component.css']
 })
-export class NewtournamentComponent implements OnInit, AfterViewChecked {
+export class TournamentComponent implements OnInit, AfterViewChecked {
   tournamentName: string;
   pilotName: string;
   newTournamentCreated = -1;

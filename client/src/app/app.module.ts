@@ -7,7 +7,7 @@ import { RaceComponent } from './race/race.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { NewtournamentComponent } from './newtournament/newtournament.component';
+import { TournamentComponent } from './tournament/tournament.component';
 import { PilotComponent } from './pilot/pilot.component';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { PilotComponent } from './pilot/pilot.component';
     AppComponent,
     RaceComponent,
     DashboardComponent,
-    NewtournamentComponent,
+    TournamentComponent,
     PilotComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
