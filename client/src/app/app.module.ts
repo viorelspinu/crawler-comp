@@ -9,6 +9,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { TournamentComponent } from './tournament/tournament.component';
 import { PilotComponent } from './pilot/pilot.component';
+import { AppNavbarComponent } from './app-navbar/app-navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,16 @@ import { PilotComponent } from './pilot/pilot.component';
     RaceComponent,
     DashboardComponent,
     TournamentComponent,
-    PilotComponent
+    PilotComponent,
+    AppNavbarComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule.forRoot()
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,47 +1,86 @@
 <div *ngIf="newTournamentCreated === 0">
-  <br>
 
-  <br> New tournament name :
-  <input id="tournamentName" [(ngModel)]="tournamentName" placeholder="name" />
-  <br><br>
+  <div class="card mt-5">
+    <div class="card-body">
+      <h5 class="card-title">Create new tournament</h5>
 
-  <button (click)="saveNewTournament()">Create New Tournament</button>
+      <div class='mt-4'>
+        <div class="form-group">
+          <label for="tournamentName">Tournament Name</label>
 
-  <br>
-  <br>
+          <input class="form-control" id="tournamentName" [(ngModel)]="tournamentName" placeholder="name" />
+
+          <button class='mt-3 btn btn-primary' (click)="saveNewTournament()">Create Tournament</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <div *ngIf="newTournamentCreated === 1">
 
-  <br>
-  <br> Pilots for <b>
-    {{tournamentService.activeTournament.name}}
-  </b>
-  <div *ngIf="tournamentService.stillAddingPilots">
-    <br>
-    <br>
-    <input (keydown)="keydownOnPilotText($event)" id="pilotName" [(ngModel)]="pilotName" placeholder="name" />
-    <button (click)="addNewPilot()">Add Pilot</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button (click)="setShowAddPilots(false)">Done Adding Pilots</button>
-    <br>
-    <br>
+  <div class="card mt-5">
+    <div class="card-body">
+      <h5 class="card-title">Pilots for {{tournamentService.activeTournament.name}}
+      </h5>
+
+
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Races</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let pilot of pilots.reverse() '>
+            <td>
+              {{pilot.id}}
+            </td>
+            <td>
+              {{pilot.name}}
+
+            </td>
+            <td>
+              {{pilot.lastRaceIndex}}
+            </td>
+            <td>
+              <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
+                  view details
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <br>
-  <br>
 
+  <div *ngIf="tournamentService.stillAddingPilots" class="card mt-5">
+    <div class="card-body">
+      <h5 class="card-title">Add new pilot
+      </h5>
 
-  <div *ngFor='let pilot of pilots.reverse()' style='width:300px;'>
-    id:{{pilot.id}} -
-    <a routerLink="/pilot/{{pilot.id}}">
-      {{pilot.name}}     
-    </a> 
-    &nbsp;&nbsp;
-    tries : {{pilot.lastRaceIndex}}
+      <div class='mt-4'>
+        <div class="form-group">
+          <label for="pilotName">Pilot name</label>
+
+          <input class="form-control" (keydown)="keydownOnPilotText($event)" id="pilotName" [(ngModel)]="pilotName" placeholder="name"
+          />
+
+          <button class='mt-3 btn btn-primary' (click)="addNewPilot()">Add Pilot</button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class='mt-3 btn btn-secondary float-right' (click)="setShowAddPilots(false)">Finish Adding Pilots</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div *ngIf="!showAddPilots">
+  <div *ngIf="!tournamentService.stillAddingPilots">
     <br><br><br><br>
-    <button (click)="setShowAddPilots(true)">Add More Pilots</button>
+    <button class='btn btn-link' (click)="setShowAddPilots(true)">Add More Pilots</button>
   </div>
 
 </div>

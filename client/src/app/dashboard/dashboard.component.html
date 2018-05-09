@@ -1,11 +1,17 @@
-<div>
-  <b>In Progress Tournaments</b>
+<div class="card mt-5">
+  <div class="card-body">
+    <h5 class="card-title">Active Tournaments</h5>
+    <div *ngFor='let tournament of inProgressTournaments'>
+      <a routerLink="/tournament">
+        {{tournament.name}}
+      </a>
+    </div>
+  </div>
 </div>
 
-<div *ngFor='let tournament of inProgressTournaments'> {{tournament.name}}</div>
-
-<br><br><br>
-<div>
-  <b>Finished Tournaments</b>
+<div class="card mt-5">
+  <div class="card-body">
+    <h5 class="card-title">Finished Tournaments</h5>
+    <div *ngFor='let tournament of closedTournaments'> {{tournament.name}}</div>
+  </div>
 </div>
-<div *ngFor='let tournament of closedTournaments'> {{tournament.name}}</div>
