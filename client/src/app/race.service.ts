@@ -31,13 +31,13 @@ export class RaceService {
     this.raceUrl = this.configurationService.baseURL + this.raceUrl;
   }
 
-  addRaceEvent(raceEventType: RaceEventType): void {
-    this.raceEvents.push(raceEventType);
-    this.points = this.points + raceEventType.points;
+  addRaceEvent(raceEvent: RaceEventType): void {
+    this.raceEvents.push(raceEvent);
+    this.points = this.points + raceEvent.points;
 
     this.raceEventService
       .saveRaceEvent(
-        raceEventType.id,
+        raceEvent.id,
         this.activePilot.id,
         this.tournamentService.activeTournament.id,
         this.activePilot.lastRaceIndex

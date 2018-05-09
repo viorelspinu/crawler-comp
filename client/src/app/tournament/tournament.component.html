@@ -19,8 +19,6 @@
 </div>
 
 <div *ngIf="newTournamentCreated === 1">
-
-
   <div class="card mt-5">
     <div class="card-body">
       <h5 class="card-title">Pilots for {{tournamentService.activeTournament.name}}
@@ -54,7 +52,6 @@
               <button class='btn btn-light' (click)="raceService.startRaceForPilot(pilot.id)">Race now</button>
             </td>
 
-
           </tr>
         </tbody>
       </table>
@@ -63,8 +60,7 @@
 
   <div *ngIf="tournamentService.stillAddingPilots" class="card mt-5">
     <div class="card-body">
-      <h5 class="card-title">Add new pilot
-      </h5>
+      <h5 class="card-title">Add new pilot</h5>
 
       <div class='mt-4'>
         <div class="form-group">

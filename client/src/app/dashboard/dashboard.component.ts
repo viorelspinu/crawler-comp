@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit {
   }
 
   loadTournaments(): void {
-    console.log('loadTournaments');
     this.tournamentService.getTournaments().subscribe(tournaments => {
       for (const tournament of tournaments) {
         if (tournament.finished) {
