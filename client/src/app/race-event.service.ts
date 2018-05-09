@@ -7,36 +7,36 @@ import { ConfigurationService } from './configuration.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MistakeService {
-  private mistakeTypeUrl = '/api/mistake-type';
+export class RaceEventService {
+  private raceEventTypeUrl = '/api/mistake-type';
   private mistakeUrl = '/api/mistake';
 
-  mistakeTypes: RaceEventType[] = [];
+  raceEventTypes: RaceEventType[] = [];
 
   constructor(
     private http: HttpClient,
     private configurationService: ConfigurationService
   ) {
-    this.mistakeTypeUrl =
-      this.configurationService.baseURL + this.mistakeTypeUrl;
+    this.raceEventTypeUrl =
+      this.configurationService.baseURL + this.raceEventTypeUrl;
     this.mistakeUrl = this.configurationService.baseURL + this.mistakeUrl;
     this.initRaceEventTypes();
   }
 
   initRaceEventTypes(): void {
     this.http
-      .get<RaceEventType[]>(this.mistakeTypeUrl)
-      .subscribe(mistakeTypes => (this.mistakeTypes = mistakeTypes));
+      .get<RaceEventType[]>(this.raceEventTypeUrl)
+      .subscribe(raceEventTypes => (this.raceEventTypes = raceEventTypes));
   }
 
   saveMistake(
-    mistakeTypeId: number,
+    raceEventTypeId: number,
     pilotId: number,
     tournamentId: number,
     raceId: number
   ): Observable<number> {
     return this.http.post<number>(this.mistakeUrl, {
-      mistakeTypeId: mistakeTypeId,
+      raceEventTypeId: raceEventTypeId,
       tournamentId: tournamentId,
       pilotId: pilotId,
       raceId: raceId

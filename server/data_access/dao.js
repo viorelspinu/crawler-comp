@@ -48,9 +48,9 @@ function Dao() {
     });
   };
 
-  this.getAllMistakeTypes = function(res) {
+  this.getAllRaceEventTypes = function(res) {
     connection.acquire(function(err, con) {
-      con.query('SELECT * FROM mistake_type', function(err, result) {
+      con.query('SELECT * FROM race_event_type', function(err, result) {
         con.release();
         res.send(result);
       });
@@ -124,7 +124,7 @@ function Dao() {
 
   this.saveMistake = function(req, res) {
     connection.acquire(function(err, con) {
-      let mistakeTypeId = req.body.mistakeTypeId;
+      let raceEventTypeId = req.body.raceEventTypeId;
       let pilotId = req.body.pilotId;
       let tournamentId = req.body.tournamentId;
       let raceId = req.body.raceId;
@@ -133,7 +133,7 @@ function Dao() {
 
       con.query(
         'INSERT INTO mistake(mistake_type_id, tournament_id, pilot_id, race_index) VALUES(?, ?, ?, ?)',
-        [mistakeTypeId, tournamentId, pilotId, raceId],
+        [raceEventTypeId, tournamentId, pilotId, raceId],
         function(err, result) {
           let insertId = result.insertId;
           con.release();

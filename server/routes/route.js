@@ -20,7 +20,7 @@ module.exports = {
     });
 
     app.get('/api/mistake-type', function(req, res) {
-      dao.getAllMistakeTypes(res);
+      dao.getAllRaceEventTypes(res);
     });
 
     app.post('/api/tournament', function(req, res) {

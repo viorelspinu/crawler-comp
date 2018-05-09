@@ -5,20 +5,20 @@
 <br>
 <br>
 
-<button class="button" (click)="removeLastMistake();">
+<button class="button" (click)="removeLastRaceEvent();">
     UNDO
 </button>
 
 <br>
 <br>
 
-<span *ngFor='let mistake of mistakeService.mistakeTypes; '>
+<span *ngFor='let raceEvent of raceEventService.raceEventTypes; '>
 
-    <button class="button" (click)="addMistake(mistake.id, mistake.points, mistake.name);">
-        {{mistake.name}} ({{mistake.points}})
+    <button class="button" (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
+        {{raceEvent.name}} ({{raceEvent.points}})
     </button>
 
 </span>
 
 <div>{{raceService.missPoints}}</div>
-<div *ngFor='let mistake of raceService.mistakes'> {{mistake.name}} : {{mistake.points}}</div>
+<div *ngFor='let raceEvent of raceService.raceEventTypes'> {{raceEvent.name}} : {{raceEvent.points}}</div>

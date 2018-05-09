@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RaceEventType } from './race-event-type';
 import { Pilot } from './pilot';
-import { MistakeService } from './mistake.service';
+import { RaceEventService } from './race-event.service';
 import { TournamentService } from './tournament.service';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,7 +19,7 @@ export class RaceService {
   private raceUrl = '/api/race';
 
   constructor(
-    private mistakeService: MistakeService,
+    private raceEventService: RaceEventService,
     private tournamentService: TournamentService,
     private http: HttpClient,
     private configurationService: ConfigurationService
@@ -27,13 +27,13 @@ export class RaceService {
     this.raceUrl = this.configurationService.baseURL + this.raceUrl;
   }
 
-  addMistake(mistakeType: RaceEventType): void {
-    this.mistakes.push(mistakeType);
-    this.mistakePoints = this.mistakePoints + mistakeType.points;
+  addRaceEvent(raceEventType: RaceEventType): void {
+    this.mistakes.push(raceEventType);
+    this.mistakePoints = this.mistakePoints + raceEventType.points;
 
-    this.mistakeService
+    this.raceEventService
       .saveMistake(
-        mistakeType.id,
+        raceEventType.id,
         this.activePilot.id,
         this.tournamentService.activeTournament.id,
         this.activePilot.lastRaceIndex
