@@ -19,7 +19,7 @@ module.exports = {
       dao.getActiveTournament(res);
     });
 
-    app.get('/api/mistake-type', function(req, res) {
+    app.get('/api/race-event-type', function(req, res) {
       dao.getAllRaceEventTypes(res);
     });
 
@@ -35,8 +35,8 @@ module.exports = {
       dao.patchPilot(req, res);
     });
 
-    app.post('/api/mistake', function(req, res) {
-      dao.saveMistake(req, res);
+    app.post('/api/race-event', function(req, res) {
+      dao.saveRaceEvent(req, res);
     });
   }
 };

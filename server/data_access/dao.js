@@ -122,7 +122,7 @@ function Dao() {
     });
   };
 
-  this.saveMistake = function(req, res) {
+  this.saveRaceEvent = function(req, res) {
     connection.acquire(function(err, con) {
       let raceEventTypeId = req.body.raceEventTypeId;
       let pilotId = req.body.pilotId;
@@ -132,7 +132,7 @@ function Dao() {
       console.log(raceId);
 
       con.query(
-        'INSERT INTO mistake(mistake_type_id, tournament_id, pilot_id, race_index) VALUES(?, ?, ?, ?)',
+        'INSERT INTO race_event(race_event_type_id, tournament_id, pilot_id, race_index) VALUES(?, ?, ?, ?)',
         [raceEventTypeId, tournamentId, pilotId, raceId],
         function(err, result) {
           let insertId = result.insertId;

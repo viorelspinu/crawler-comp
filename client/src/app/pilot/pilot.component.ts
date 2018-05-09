@@ -34,8 +34,8 @@ export class PilotComponent implements OnInit {
         this.raceService.activePilot.lastRaceIndex
       )
       .subscribe();
-    this.raceService.mistakes = [];
-    this.raceService.mistakePoints = 0;
+    this.raceService.raceEvents = [];
+    this.raceService.points = 0;
     this.router.navigateByUrl('/race');
   }
 

@@ -11,8 +11,8 @@ import { ConfigurationService } from './configuration.service';
   providedIn: 'root'
 })
 export class RaceService {
-  mistakes: RaceEventType[] = [];
-  mistakePoints = 0;
+  raceEvents: RaceEventType[] = [];
+  points = 0;
   activePilot: Pilot;
   raceIndex = 0;
 
@@ -28,11 +28,11 @@ export class RaceService {
   }
 
   addRaceEvent(raceEventType: RaceEventType): void {
-    this.mistakes.push(raceEventType);
-    this.mistakePoints = this.mistakePoints + raceEventType.points;
+    this.raceEvents.push(raceEventType);
+    this.points = this.points + raceEventType.points;
 
     this.raceEventService
-      .saveMistake(
+      .saveRaceEvent(
         raceEventType.id,
         this.activePilot.id,
         this.tournamentService.activeTournament.id,
@@ -41,10 +41,10 @@ export class RaceService {
       .subscribe();
   }
 
-  removeLastMistake(): void {
-    if (this.mistakes.length > 0) {
-      const lastMistake = this.mistakes.pop();
-      this.mistakePoints = this.mistakePoints - lastMistake.points;
+  removeLastRaceEvent(): void {
+    if (this.raceEvents.length > 0) {
+      const lastRaceEvent = this.raceEvents.pop();
+      this.points = this.points - lastRaceEvent.points;
     }
   }
 }

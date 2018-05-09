@@ -8,8 +8,8 @@ import { ConfigurationService } from './configuration.service';
   providedIn: 'root'
 })
 export class RaceEventService {
-  private raceEventTypeUrl = '/api/mistake-type';
-  private mistakeUrl = '/api/mistake';
+  private raceEventTypeUrl = '/api/race-event-type';
+  private raceEventUrl = '/api/race-event';
 
   raceEventTypes: RaceEventType[] = [];
 
@@ -19,7 +19,7 @@ export class RaceEventService {
   ) {
     this.raceEventTypeUrl =
       this.configurationService.baseURL + this.raceEventTypeUrl;
-    this.mistakeUrl = this.configurationService.baseURL + this.mistakeUrl;
+    this.raceEventUrl = this.configurationService.baseURL + this.raceEventUrl;
     this.initRaceEventTypes();
   }
 
@@ -29,13 +29,13 @@ export class RaceEventService {
       .subscribe(raceEventTypes => (this.raceEventTypes = raceEventTypes));
   }
 
-  saveMistake(
+  saveRaceEvent(
     raceEventTypeId: number,
     pilotId: number,
     tournamentId: number,
     raceId: number
   ): Observable<number> {
-    return this.http.post<number>(this.mistakeUrl, {
+    return this.http.post<number>(this.raceEventUrl, {
       raceEventTypeId: raceEventTypeId,
       tournamentId: tournamentId,
       pilotId: pilotId,

@@ -25,11 +25,11 @@ export class RaceComponent implements OnInit {
     }
   }
 
-  addMistake(id: number, points: number, name: string): void {
+  addRaceEvent(id: number, points: number, name: string): void {
     this.raceService.addRaceEvent(new RaceEventType(id, points, name));
   }
 
-  removeLastMistake(): void {
-    this.raceService.removeLastMistake();
+  removeLastRaceEvent(): void {
+    this.raceService.removeLastRaceEvent();
   }
 }
