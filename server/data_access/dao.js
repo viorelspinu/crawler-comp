@@ -95,7 +95,7 @@ function Dao() {
       console.log(tournamentId);
 
       con.query(
-        'INSERT INTO pilot(name, tournament_id, lastRaceIndex) VALUES(?, ?, 0)',
+        'INSERT INTO pilot(name, tournament_id, last_race_index) VALUES(?, ?, 0)',
         [name, tournamentId],
         function(err, result) {
           let insertId = result.insertId;
