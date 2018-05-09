@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MistakeType } from './mistaketype';
+import { RaceEventType } from './race-event-type';
 import { ConfigurationService } from './configuration.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class MistakeService {
   private mistakeTypeUrl = '/api/mistake-type';
   private mistakeUrl = '/api/mistake';
 
-  mistakeTypes: MistakeType[] = [];
+  mistakeTypes: RaceEventType[] = [];
 
   constructor(
     private http: HttpClient,
@@ -20,12 +20,12 @@ export class MistakeService {
     this.mistakeTypeUrl =
       this.configurationService.baseURL + this.mistakeTypeUrl;
     this.mistakeUrl = this.configurationService.baseURL + this.mistakeUrl;
-    this.initMistakeTypes();
+    this.initRaceEventTypes();
   }
 
-  initMistakeTypes(): void {
+  initRaceEventTypes(): void {
     this.http
-      .get<MistakeType[]>(this.mistakeTypeUrl)
+      .get<RaceEventType[]>(this.mistakeTypeUrl)
       .subscribe(mistakeTypes => (this.mistakeTypes = mistakeTypes));
   }
 

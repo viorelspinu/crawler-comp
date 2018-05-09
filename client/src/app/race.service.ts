@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MistakeType } from './mistaketype';
+import { RaceEventType } from './race-event-type';
 import { Pilot } from './pilot';
 import { MistakeService } from './mistake.service';
 import { TournamentService } from './tournament.service';
@@ -11,7 +11,7 @@ import { ConfigurationService } from './configuration.service';
   providedIn: 'root'
 })
 export class RaceService {
-  mistakes: MistakeType[] = [];
+  mistakes: RaceEventType[] = [];
   mistakePoints = 0;
   activePilot: Pilot;
   raceIndex = 0;
@@ -27,7 +27,7 @@ export class RaceService {
     this.raceUrl = this.configurationService.baseURL + this.raceUrl;
   }
 
-  addMistake(mistakeType: MistakeType): void {
+  addMistake(mistakeType: RaceEventType): void {
     this.mistakes.push(mistakeType);
     this.mistakePoints = this.mistakePoints + mistakeType.points;
 

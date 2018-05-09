@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RaceService } from '../race.service';
-import { MistakeType } from '../mistaketype';
+import { RaceEventType } from '../race-event-type';
 import { MistakeService } from '../mistake.service';
 import { Pilot } from '../pilot';
 import { Router } from '@angular/router';
@@ -26,7 +26,7 @@ export class RaceComponent implements OnInit {
   }
 
   addMistake(id: number, points: number, name: string): void {
-    this.raceService.addMistake(new MistakeType(id, points, name));
+    this.raceService.addMistake(new RaceEventType(id, points, name));
   }
 
   removeLastMistake(): void {

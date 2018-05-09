@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MistakeType } from './mistaketype';
+import { RaceEventType } from './race-event-type';
 import { Tournament } from './tournament';
 import { ConfigurationService } from './configuration.service';
 import { catchError, map, tap } from 'rxjs/operators';
