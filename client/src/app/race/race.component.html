@@ -1,24 +1,82 @@
-<br>
-<div *ngIf="raceService.activePilot.name">
-    <br> Try number <b>{{raceService.activePilot.lastRaceIndex}}</b> for pilot : <b>{{raceService.activePilot.name}}</b>
+<div class="container">
+    <div class='row'>
+        <div class="card col-9 mr-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div *ngIf="raceService.activePilot.name" class='col-9'>
+                        <div class='clearfix'>
+                            <div class='float-left pt-3'>
+                                Race number <b>{{raceService.activePilot.lastRaceIndex}}</b> for pilot : <b>{{raceService.activePilot.name}}</b>
+                            </div>
+                            <div class='float-right pt-1'>
+                                <button class="btn btn-success" (click)="finishRace();">
+                                Finish Race
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </h5>
+            </div>
+        </div>
+
+        <div class='col-1 badge badge-primary pt-4'>
+            <h2>
+                {{raceService.points}}
+            </h2>
+        </div>
+    </div>
 </div>
-<br>
-<br>
 
-<button class="button" (click)="removeLastRaceEvent();">
-    UNDO
-</button>
+<div class="card mt-5">
+    <div class="card-body">
 
-<br>
-<br>
+        <div class='mt-4'>
+            <div class="form-group">
+                <div class=" clearfix">
+                    <button *ngFor='let raceEvent of raceEventService.raceEventTypes; ' class="btn btn-primary m-3" (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
+                                {{raceEvent.name}} ({{raceEvent.points}})
+                    </button>
 
-<span *ngFor='let raceEvent of raceEventService.raceEventTypes; '>
+                    <button class="btn btn-light" (click)="removeLastRaceEvent();">
+                        Undo last event
+                    </button>
 
-    <button class="button" (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
-        {{raceEvent.name}} ({{raceEvent.points}})
-    </button>
+                </div>
 
-</span>
+            </div>
+        </div>
 
-<div>{{raceService.missPoints}}</div>
-<div *ngFor='let raceEvent of raceService.raceEventTypes'> {{raceEvent.name}} : {{raceEvent.points}}</div>
+    </div>
+</div>
+
+
+<div class="card mt-5">
+    <div class="card-body">
+        <h5 class="card-title">
+            Race Events
+        </h5>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let raceEvent of raceService.raceEvents'>
+                    <td>
+                        {{raceEvent.name}}
+                    </td>
+                    <td>
+                        {{raceEvent.points}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>

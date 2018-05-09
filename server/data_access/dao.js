@@ -6,36 +6,27 @@ connection.init();
 function Dao() {
   this.getAllPilots = function(res) {
     connection.acquire(function(err, con) {
-      con.query('SELECT id, name, last_race_index as lastRaceIndex FROM pilot', function(err, result) {
-        con.release();
-        res.send(result);
-      });
-    });
-  };
-
-  this.getTournamentById = function(res) {
-    let id = req.body.id;
-    connection.acquire(function(err, con) {
-      con.query('SELECT * FROM tournament WHERE id = ?', [id], function(
-        err,
-        result
-      ) {
-        con.release();
-        res.send(result);
-      });
+      con.query(
+        'SELECT id, name, last_race_index as lastRaceIndex FROM pilot',
+        function(err, result) {
+          con.release();
+          res.send(result);
+        }
+      );
     });
   };
 
   this.getPilotById = function(req, res) {
     let id = req.params.id;
     connection.acquire(function(err, con) {
-      con.query('SELECT id, name, last_race_index as lastRaceIndex FROM pilot WHERE id = ?', [id], function(
-        err,
-        result
-      ) {
-        con.release();
-        res.send(result);
-      });
+      con.query(
+        'SELECT id, name, last_race_index as lastRaceIndex FROM pilot WHERE id = ?',
+        [id],
+        function(err, result) {
+          con.release();
+          res.send(result);
+        }
+      );
     });
   };
 
@@ -61,6 +52,21 @@ function Dao() {
     connection.acquire(function(err, con) {
       con.query(
         'SELECT * FROM tournament WHERE finished=FALSE LIMIT 1',
+        function(err, result) {
+          con.release();
+          console.log(result);
+          res.send(result);
+        }
+      );
+    });
+  };
+
+  this.getTournamentResultsForPilot = function(req, res) {
+    let pilotId = req.query.pilotId;
+    connection.acquire(function(err, con) {
+      con.query(
+        'SELECT t.name, t.points, e.race_index as raceIndex FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index',
+        [pilotId],
         function(err, result) {
           con.release();
           console.log(result);
@@ -112,7 +118,7 @@ function Dao() {
     let lastRaceIndex = req.body.lastRaceIndex;
     connection.acquire(function(err, con) {
       con.query(
-        'UPDATE pilot SET lastRaceIndex=? WHERE id = ?',
+        'UPDATE pilot SET last_race_index=? WHERE id = ?',
         [lastRaceIndex, id],
         function(err, result) {
           con.release();

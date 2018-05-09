@@ -3,6 +3,7 @@ import { Renderer2 } from '@angular/core';
 
 import { PilotService } from '../pilot.service';
 import { TournamentService } from '../tournament.service';
+import { RaceService } from '../race.service';
 import { Tournament } from '../tournament';
 import { Pilot } from '../pilot';
 
@@ -20,6 +21,7 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   constructor(
     private pilotService: PilotService,
     private tournamentService: TournamentService,
+    private raceService: RaceService,
     private renderer2: Renderer2
   ) {}
 
@@ -31,6 +33,9 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
           .subscribe(pilots => {
             this.pilots = pilots;
             this.newTournamentCreated = 1;
+            if (this.pilots.length > 0) {
+              this.tournamentService.stillAddingPilots = false;
+            }
           });
       } else {
         this.newTournamentCreated = 0;

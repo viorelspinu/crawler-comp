@@ -32,4 +32,8 @@ export class RaceComponent implements OnInit {
   removeLastRaceEvent(): void {
     this.raceService.removeLastRaceEvent();
   }
+
+  finishRace(): void {
+    this.router.navigateByUrl('/tournament');
+  }
 }

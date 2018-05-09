@@ -19,6 +19,10 @@ module.exports = {
       dao.getActiveTournament(res);
     });
 
+    app.get('/api/tournament/results', function(req, res) {
+      dao.getTournamentResultsForPilot(req, res);
+    });
+
     app.get('/api/race-event-type', function(req, res) {
       dao.getAllRaceEventTypes(res);
     });

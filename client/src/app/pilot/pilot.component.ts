@@ -6,6 +6,7 @@ import { RaceService } from '../race.service';
 import { TournamentService } from '../tournament.service';
 import { Pilot } from '../pilot';
 import { Router } from '@angular/router';
+import { PilotRaceEvent } from '../pilot-race-event';
 
 @Component({
   selector: 'app-pilot',
@@ -14,6 +15,10 @@ import { Router } from '@angular/router';
 })
 export class PilotComponent implements OnInit {
   pilot: Pilot;
+  rawPilotRaceEvents: PilotRaceEvent[];
+
+  results: PilotRaceEvent[][];
+  resultsTotal: number[];
 
   constructor(
     private route: ActivatedRoute,
@@ -24,25 +29,46 @@ export class PilotComponent implements OnInit {
     private router: Router
   ) {}
 
-  startTryForThisPilot(): void {
-    this.raceService.activePilot = this.pilot;
-    this.raceService.activePilot.lastRaceIndex =
-      this.raceService.activePilot.lastRaceIndex + 1;
-    this.pilotService
-      .updatePilotTryCount(
-        this.pilot.id,
-        this.raceService.activePilot.lastRaceIndex
-      )
-      .subscribe();
-    this.raceService.raceEvents = [];
-    this.raceService.points = 0;
-    this.router.navigateByUrl('/race');
-  }
-
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.pilotService.getPilotById(id).subscribe(pilot => {
       this.pilot = pilot[0];
+      this.tournamentService
+        .getPilotTournamentEvents(this.pilot.id)
+        .subscribe(results => {
+          this.rawPilotRaceEvents = results;
+          this.computePilotResultsForDisplay();
+        });
     });
+  }
+
+  computePilotResultsForDisplay(): void {
+    this.results = [];
+    this.resultsTotal = [];
+
+    if (this.rawPilotRaceEvents.length === 0) {
+      return;
+    }
+    let i = 0;
+    let j = 0;
+    let total = 0;
+    let raceIndex = this.rawPilotRaceEvents[0].raceIndex;
+    this.results[0] = [];
+    for (const event of this.rawPilotRaceEvents) {
+      if (!(event.raceIndex === raceIndex)) {
+        raceIndex = event.raceIndex;
+        this.resultsTotal[i] = total;
+        total = 0;
+        i++;
+        this.results[i] = [];
+        j = 0;
+      }
+      console.log('i=' + i);
+      console.log('j=' + j);
+      this.results[i][j] = event;
+      total = total + event.points;
+      j++;
+    }
+    this.resultsTotal[i] = total;
   }
 }

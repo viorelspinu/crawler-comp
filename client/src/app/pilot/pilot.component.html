@@ -1,6 +1,47 @@
-<div *ngIf="pilot">
-  {{pilot.id}} - {{pilot.name}}
-  <br>
-  <br>
-  <button (click)="startTryForThisPilot()">New try for this pilot</button>
+<div class="container" *ngIf="results">
+
+  <div class='clearfix'>
+    <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament">Back to tournament</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title" *ngIf="pilot">
+        Results for <b>{{pilot.name}}</b>
+      </h5>
+
+      <div class='mt-3'>
+
+        <div class="card mt-4" *ngFor='let resultList of results;let i=index;'>
+          <div class="card-body">
+            <h5 class='mb-4 card-title'>
+              <div class='clearfix'>
+                <div class='float-left'>
+                  Race {{resultList[0].raceIndex}}
+                </div>
+                <div class='float-right'>
+                  Total points : {{resultsTotal[i]}}
+                </div>
+              </div>
+            </h5>
+
+            <table class="table">
+              <tbody>
+                <tr *ngFor='let event of resultList'>
+                  <td>
+                    {{event.name}}
+                  </td>
+                  <td>
+                    {{event.points}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament">Back to tournament</a>
 </div>

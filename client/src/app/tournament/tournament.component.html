@@ -20,12 +20,11 @@
 
 <div *ngIf="newTournamentCreated === 1">
 
+
   <div class="card mt-5">
     <div class="card-body">
       <h5 class="card-title">Pilots for {{tournamentService.activeTournament.name}}
       </h5>
-
-
       <table class="table mt-5">
         <thead>
           <tr>
@@ -41,17 +40,21 @@
               {{pilot.id}}
             </td>
             <td>
+              <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
               {{pilot.name}}
+              </a>
+
 
             </td>
             <td>
               {{pilot.lastRaceIndex}}
             </td>
+
             <td>
-              <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
-                  view details
-              </a>
+              <button class='btn btn-light' (click)="raceService.startRaceForPilot(pilot.id)">Race now</button>
             </td>
+
+
           </tr>
         </tbody>
       </table>

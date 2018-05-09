@@ -5,6 +5,7 @@ import { RaceEventType } from './race-event-type';
 import { Tournament } from './tournament';
 import { ConfigurationService } from './configuration.service';
 import { catchError, map, tap } from 'rxjs/operators';
+import { PilotRaceEvent } from './pilot-race-event';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class TournamentService {
   private tournamentsUrl = '/api/tournament';
   private activeTournamentsUrl = '/api/tournament/active';
+  private resultsUrl = '/api/tournament/results';
 
   activeTournament: Tournament;
   stillAddingPilots = true;
@@ -24,6 +26,7 @@ export class TournamentService {
       this.configurationService.baseURL + this.tournamentsUrl;
     this.activeTournamentsUrl =
       this.configurationService.baseURL + this.activeTournamentsUrl;
+    this.resultsUrl = this.configurationService.baseURL + this.resultsUrl;
   }
 
   getTournaments(): Observable<Tournament[]> {
@@ -36,6 +39,10 @@ export class TournamentService {
         this.activeTournament = t[0];
       })
     );
+  }
+
+  getPilotTournamentEvents(pilotId: number): Observable<PilotRaceEvent[]> {
+    return this.http.get<PilotRaceEvent[]>(this.resultsUrl + '?pilotId=' + pilotId);
   }
 
   saveTournament(tournamentName: string): Observable<number> {
