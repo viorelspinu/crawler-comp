@@ -1,32 +1,32 @@
-<div class="container">
-    <div class='row'>
-        <div class="card col-9 mr-4">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <div *ngIf="raceService.activePilot.name" class='col-9'>
-                        <div class='clearfix'>
-                            <div class='float-left pt-3'>
-                                Race number <b>{{raceService.activePilot.lastRaceIndex}}</b> for pilot : <b>{{raceService.activePilot.name}}</b>
-                            </div>
-                            <div class='float-right pt-1'>
-                                <button class="btn btn-success" (click)="finishRace();">
+<div class="container clearfix">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                <div *ngIf="raceService.activePilot.name" class=''>
+                    <div class='clearfix'>
+                        <div class='float-left pt-3'>
+                            Race <b>{{raceService.activePilot.lastRaceIndex}}</b>, <b>{{raceService.activePilot.name}}</b>
+                        </div>
+                        <div class='float-right pt-1 mt-2'>
+                            <button class="btn btn-success" (click)="finishRace();">
                                 Finish Race
                             </button>
-                            </div>
                         </div>
                     </div>
+                </div>
 
 
-                </h5>
-            </div>
-        </div>
-
-        <div class='col-1 badge badge-primary pt-4'>
-            <h2>
-                {{raceService.points}}
-            </h2>
+            </h5>
         </div>
     </div>
+
+    <div class='badge badge-primary mt-2 pt-md-2 pl-4 pr-4 float-right'>
+        <h2>
+            {{raceService.points}}
+        </h2>
+    </div>
+
 </div>
 
 <div class="card mt-5">
@@ -35,11 +35,11 @@
         <div class='mt-4'>
             <div class="form-group">
                 <div class=" clearfix">
-                    <button *ngFor='let raceEvent of raceEventService.raceEventTypes; ' class="btn btn-primary m-3" (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
+                    <button *ngFor='let raceEvent of raceEventService.raceEventTypes; ' class="btn btn-primary m-3" style='width:200px !important;' (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
                                 {{raceEvent.name}} ({{raceEvent.points}})
                     </button>
 
-                    <button class="btn btn-light" (click)="removeLastRaceEvent();">
+                    <button class="btn btn-light btn-block" (click)="removeLastRaceEvent();">
                         Undo last event
                     </button>
 
