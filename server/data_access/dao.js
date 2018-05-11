@@ -134,7 +134,7 @@ function Dao() {
       let raceId = req.body.raceId;
       let seconds = req.body.seconds;
 
-      console.log(raceId);
+      console.log(seconds);
 
       con.query(
         'INSERT INTO race_event(race_event_type_id, tournament_id, pilot_id, race_index, seconds) VALUES(?, ?, ?, ?, ?)',
