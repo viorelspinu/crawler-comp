@@ -11,7 +11,5 @@ export class AppComponent implements OnInit {
 
   constructor(private tournamentService: TournamentService) {}
 
-  ngOnInit() {
-    this.tournamentService.getActiveTournament().subscribe();
-  }
+  ngOnInit() {}
 }
