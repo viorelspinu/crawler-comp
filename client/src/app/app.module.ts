@@ -11,7 +11,6 @@ import { TournamentComponent } from './tournament/tournament.component';
 import { PilotComponent } from './pilot/pilot.component';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CreateNewTournamnetComponent } from './create-new-tournamnet/create-new-tournamnet.component';
 import { CreateNewTournamentComponent } from './create-new-tournament/create-new-tournament.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { CreateNewTournamentComponent } from './create-new-tournament/create-new
     TournamentComponent,
     PilotComponent,
     AppNavbarComponent,
-    CreateNewTournamnetComponent,
     CreateNewTournamentComponent
   ],
   imports: [

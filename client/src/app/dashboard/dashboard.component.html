@@ -6,6 +6,9 @@
         {{tournament.name}}
       </a>
     </div>
+    <button class='btn btn-primary mt-4' routerLink="/new-tournament">
+      New Tournament
+  </button>
   </div>
 </div>
 
@@ -15,7 +18,7 @@
     <div *ngFor='let tournament of closedTournaments'>
       <a routerLink="/tournament/{{tournament.id}}">
           {{tournament.name}}
-        </a>
+      </a>
     </div>
   </div>
 </div>

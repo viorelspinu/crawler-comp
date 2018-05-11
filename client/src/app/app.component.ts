@@ -12,4 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private tournamentService: TournamentService) {}
 
   ngOnInit() {}
+
+  
 }
