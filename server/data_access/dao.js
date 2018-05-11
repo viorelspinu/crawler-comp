@@ -138,7 +138,7 @@ function Dao() {
 
       con.query(
         'INSERT INTO race_event(race_event_type_id, tournament_id, pilot_id, race_index, seconds) VALUES(?, ?, ?, ?, ?)',
-        [raceEventTypeId, tournamentId, pilotId, raceId],
+        [raceEventTypeId, tournamentId, pilotId, raceId, seconds],
         function(err, result) {
           let insertId = result.insertId;
           con.release();
