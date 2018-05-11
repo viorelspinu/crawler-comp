@@ -4,11 +4,11 @@ var connection = require('../connection/MySQLConnect');
 connection.init();
 
 function Dao() {
-  this.getAllPilots = function(res) {
-    connection.acquire(function(err, con) {
+  this.getAllPilots = function (res) {
+    connection.acquire(function (err, con) {
       con.query(
         'SELECT id, name, last_race_index as lastRaceIndex FROM pilot',
-        function(err, result) {
+        function (err, result) {
           con.release();
           res.send(result);
         }
@@ -16,13 +16,13 @@ function Dao() {
     });
   };
 
-  this.getPilotById = function(req, res) {
+  this.getPilotById = function (req, res) {
     let id = req.params.id;
-    connection.acquire(function(err, con) {
+    connection.acquire(function (err, con) {
       con.query(
         'SELECT id, name, last_race_index as lastRaceIndex FROM pilot WHERE id = ?',
         [id],
-        function(err, result) {
+        function (err, result) {
           con.release();
           res.send(result);
         }
@@ -30,29 +30,29 @@ function Dao() {
     });
   };
 
-  this.getAllTournaments = function(res) {
-    connection.acquire(function(err, con) {
-      con.query('SELECT * FROM tournament', function(err, result) {
+  this.getAllTournaments = function (res) {
+    connection.acquire(function (err, con) {
+      con.query('SELECT * FROM tournament', function (err, result) {
         con.release();
         res.send(result);
       });
     });
   };
 
-  this.getAllRaceEventTypes = function(res) {
-    connection.acquire(function(err, con) {
-      con.query('SELECT * FROM race_event_type', function(err, result) {
+  this.getAllRaceEventTypes = function (res) {
+    connection.acquire(function (err, con) {
+      con.query('SELECT * FROM race_event_type', function (err, result) {
         con.release();
         res.send(result);
       });
     });
   };
 
-  this.getActiveTournament = function(res) {
-    connection.acquire(function(err, con) {
+  this.getActiveTournament = function (res) {
+    connection.acquire(function (err, con) {
       con.query(
         'SELECT * FROM tournament WHERE finished=FALSE LIMIT 1',
-        function(err, result) {
+        function (err, result) {
           con.release();
           console.log(result);
           res.send(result);
@@ -61,30 +61,43 @@ function Dao() {
     });
   };
 
-  this.getTournamentResultsForPilot = function(req, res) {
+  this.getTournamentResultsForPilot = function (req, res) {
     let pilotId = req.query.pilotId;
-    connection.acquire(function(err, con) {
+    connection.acquire(function (err, con) {
       con.query(
         'SELECT t.name, t.points, e.race_index as raceIndex FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index',
         [pilotId],
-        function(err, result) {
-          con.release();
-          console.log(result);
-          res.send(result);
+        function (err, result1) {
+          con.query("SELECT MAX(id) FROM pilot",
+            function (err, result2) {
+              con.release();
+              console.log("xxxxxxxxxxxx");
+
+              let obj = new Object();
+              obj.res1 = result1;
+              obj.res2 = result2;
+
+              console.log(obj);
+              res.send(obj);
+
+
+            });
+
+
         }
       );
     });
   };
 
-  this.saveTournament = function(req, res) {
-    connection.acquire(function(err, con) {
+  this.saveTournament = function (req, res) {
+    connection.acquire(function (err, con) {
       let name = req.body.tournamentName;
       let finished = false;
 
       con.query(
         'INSERT INTO tournament(name, finished, create_date) VALUES(?, ?, NOW())',
         [name, finished],
-        function(err, result) {
+        function (err, result) {
           let insertId = result.insertId;
           con.release();
           if (err) throw err;
@@ -94,8 +107,8 @@ function Dao() {
     });
   };
 
-  this.savePilot = function(req, res) {
-    connection.acquire(function(err, con) {
+  this.savePilot = function (req, res) {
+    connection.acquire(function (err, con) {
       let name = req.body.pilotName;
       let tournamentId = req.body.tournamentId;
       console.log(tournamentId);
@@ -103,7 +116,7 @@ function Dao() {
       con.query(
         'INSERT INTO pilot(name, tournament_id, last_race_index) VALUES(?, ?, 0)',
         [name, tournamentId],
-        function(err, result) {
+        function (err, result) {
           let insertId = result.insertId;
           con.release();
           if (err) throw err;
@@ -113,14 +126,14 @@ function Dao() {
     });
   };
 
-  this.patchPilot = function(req, res) {
+  this.patchPilot = function (req, res) {
     let id = req.params.id;
     let lastRaceIndex = req.body.lastRaceIndex;
-    connection.acquire(function(err, con) {
+    connection.acquire(function (err, con) {
       con.query(
         'UPDATE pilot SET last_race_index=? WHERE id = ?',
         [lastRaceIndex, id],
-        function(err, result) {
+        function (err, result) {
           con.release();
           res.send(result);
         }
@@ -128,8 +141,8 @@ function Dao() {
     });
   };
 
-  this.saveRaceEvent = function(req, res) {
-    connection.acquire(function(err, con) {
+  this.saveRaceEvent = function (req, res) {
+    connection.acquire(function (err, con) {
       let raceEventTypeId = req.body.raceEventTypeId;
       let pilotId = req.body.pilotId;
       let tournamentId = req.body.tournamentId;
@@ -140,7 +153,7 @@ function Dao() {
       con.query(
         'INSERT INTO race_event(race_event_type_id, tournament_id, pilot_id, race_index) VALUES(?, ?, ?, ?)',
         [raceEventTypeId, tournamentId, pilotId, raceId],
-        function(err, result) {
+        function (err, result) {
           let insertId = result.insertId;
           con.release();
           if (err) throw err;
