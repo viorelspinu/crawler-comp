@@ -1,3 +1,9 @@
+<div class="card mt-5 mb-3" *ngIf="raceFinished">
+    <div class="card-body">
+        <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament">Back to tournament</a>
+    </div>
+</div>
+
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
@@ -11,11 +17,11 @@
 
                 <div class='pt-1 mt-2'>
 
-                    <button class="btn btn-success" (click)="startRace();">
+                    <button *ngIf="!raceStarted" class="btn btn-success" (click)="startRace();">
                         Start Race
                     </button>
 
-                    <button class="ml-4 btn btn-success" (click)="finishRace();">
+                    <button *ngIf="raceStarted && !raceFinished" class="btn btn-success" (click)="finishRace();">
                         Finish Race
                     </button>
                 </div>
@@ -39,11 +45,11 @@
     </div>
 </div>
 
-<div class="card mt-2">
+<div class="card mt-2" *ngIf="raceStarted">
     <div class="card-body">
         <div class='mt-1 text-center'>
             <div *ngFor='let raceEvent of raceEventService.raceEventTypes; '>
-                <button class="btn btn-primary m-2" style='width:160px !important;' (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
+                <button *ngIf="!raceEvent.automatic" class="btn btn-primary m-2" style='width:160px !important;' (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
                     {{raceEvent.name}} ({{raceEvent.points}})
                 </button>
             </div>
@@ -57,7 +63,7 @@
 </div>
 
 
-<div class="card mt-5">
+<div class="card mt-5" *ngIf="raceStarted">
     <div class="card-body">
         <h5 class="card-title">
             Race Events
@@ -78,7 +84,11 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
 
-
+<div class="card mt-5" *ngIf="raceFinished">
+    <div class="card-body">
+        <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament">Back to tournament</a>
     </div>
 </div>

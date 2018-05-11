@@ -19,6 +19,7 @@ export class RaceComponent implements OnInit, OnDestroy {
   clockSubscription: Subscription;
   seconds = 0;
   raceStarted = false;
+  raceFinished = false;
 
   constructor(
     private raceService: RaceService,
@@ -50,16 +51,31 @@ export class RaceComponent implements OnInit, OnDestroy {
     this.clock$ = timer(0, 1000);
     this.clockSubscription = this.clock$.subscribe(t => (this.seconds = t));
     this.raceStarted = true;
+    this.raceFinished = false;
   }
 
   finishRace(): void {
     if (!this.raceStarted) {
       return;
     }
-    this.unsubscribeClock();
-    this.raceStarted = false;
+    if (this.raceFinished) {
+      return;
+    }
 
-    // this.router.navigateByUrl('/tournament');
+    this.unsubscribeClock();
+    this.raceStarted = true;
+    this.raceFinished = true;
+
+    if (this.seconds > 5) {
+      const timeOverEvent = this.raceEventService.raceEventTypes.find(event => {
+        return event.code === 'TIME_EVENT';
+      });
+      this.addRaceEvent(
+        timeOverEvent.id,
+        timeOverEvent.points,
+        timeOverEvent.name
+      );
+    }
   }
 
   ngOnDestroy(): void {

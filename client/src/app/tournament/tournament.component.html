@@ -26,7 +26,6 @@
       <table class="table mt-5">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Races</th>
             <th></th>
@@ -34,9 +33,6 @@
         </thead>
         <tbody>
           <tr *ngFor='let pilot of pilots.reverse() '>
-            <td>
-              {{pilot.id}}
-            </td>
             <td>
               <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
               {{pilot.name}}
@@ -49,7 +45,7 @@
             </td>
 
             <td>
-              <button class='btn btn-light' (click)="raceService.startRaceForPilot(pilot.id)">Race now</button>
+              <button class='btn btn-light' (click)="raceService.startRaceForPilot(pilot.id)">Race</button>
             </td>
 
           </tr>
