@@ -42,5 +42,9 @@ module.exports = {
     app.post('/api/race-event', function(req, res) {
       dao.saveRaceEvent(req, res);
     });
+
+    app.post('/api/tournament/end', function(req, res) {
+      dao.endTournament(req, res);
+    });
   }
 };

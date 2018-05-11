@@ -126,6 +126,19 @@ function Dao() {
     });
   };
 
+  this.endTournament = function(req, res) {
+    let id = req.body.tournamentId;
+    connection.acquire(function(err, con) {
+      con.query('UPDATE tournament SET finished=1 WHERE id = ?', [id], function(
+        err,
+        result
+      ) {
+        con.release();
+        res.send(result);
+      });
+    });
+  };
+
   this.saveRaceEvent = function(req, res) {
     connection.acquire(function(err, con) {
       let raceEventTypeId = req.body.raceEventTypeId;

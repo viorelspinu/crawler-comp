@@ -42,12 +42,20 @@ export class TournamentService {
   }
 
   getPilotTournamentEvents(pilotId: number): Observable<PilotRaceEvent[]> {
-    return this.http.get<PilotRaceEvent[]>(this.resultsUrl + '?pilotId=' + pilotId);
+    return this.http.get<PilotRaceEvent[]>(
+      this.resultsUrl + '?pilotId=' + pilotId
+    );
   }
 
   saveTournament(tournamentName: string): Observable<number> {
     return this.http.post<number>(this.tournamentsUrl, {
       tournamentName: tournamentName
+    });
+  }
+
+  endActiveTournament(): Observable<any> {
+    return this.http.post(this.tournamentsUrl + '/end', {
+      tournamentId: this.activeTournament.id
     });
   }
 }

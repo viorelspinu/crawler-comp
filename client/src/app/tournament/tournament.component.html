@@ -73,9 +73,9 @@
     </div>
   </div>
 
-  <div *ngIf="!tournamentService.stillAddingPilots">
-    <br><br><br><br>
-    <button class='btn btn-link' (click)="setShowAddPilots(true)">Add More Pilots</button>
+  <div *ngIf="!tournamentService.stillAddingPilots" class='clearfix'>
+    <button class='mt-4 btn btn-link align-left' (click)="setShowAddPilots(true)">Add More Pilots</button>
+    <button class='mt-4 btn btn-secondary align-right' (click)="endTournament()">End Tournament</button>
   </div>
 
 </div>

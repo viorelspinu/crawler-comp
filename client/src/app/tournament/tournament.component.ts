@@ -26,6 +26,10 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit() {
+    this.init();
+  }
+
+  init(): void {
     this.tournamentService.getActiveTournament().subscribe(t => {
       if (this.tournamentService.activeTournament) {
         this.pilotService
@@ -74,6 +78,12 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
         this.pilots.push(new Pilot(t, this.pilotName, 0));
         this.pilotName = '';
       });
+  }
+
+  endTournament(): void {
+    this.tournamentService.endActiveTournament().subscribe(any => {
+      this.init();
+    });
   }
 
   saveNewTournament(): void {
