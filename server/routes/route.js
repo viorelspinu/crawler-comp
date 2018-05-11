@@ -8,7 +8,7 @@ module.exports = {
     });
 
     app.get('/api/pilot', function(req, res) {
-      dao.getAllPilots(res);
+      dao.getAllPilots(req, res);
     });
 
     app.get('/api/tournament', function(req, res) {

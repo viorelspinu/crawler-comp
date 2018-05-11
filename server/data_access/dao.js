@@ -4,7 +4,7 @@ var connection = require('../connection/MySQLConnect');
 connection.init();
 
 function Dao() {
-  this.getAllPilots = function(res) {
+  this.getAllPilots = function(req, res) {
     connection.acquire(function(err, con) {
       let tournamentId = req.params.tournamentId;
       con.query(
