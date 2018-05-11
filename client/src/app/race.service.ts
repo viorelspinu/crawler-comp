@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RaceEventType } from './race-event-type';
+import { RaceEvent } from './race-event';
 import { Pilot } from './pilot';
 import { RaceEventService } from './race-event.service';
 import { PilotService } from './pilot.service';
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class RaceService {
-  raceEvents: RaceEventType[] = [];
+  raceEvents: RaceEvent[] = [];
   points = 0;
   activePilot: Pilot;
   raceIndex = 0;
@@ -31,13 +32,14 @@ export class RaceService {
     this.raceUrl = this.configurationService.baseURL + this.raceUrl;
   }
 
-  addRaceEvent(raceEvent: RaceEventType): void {
+  addRaceEvent(raceEvent: RaceEvent): void {
     this.raceEvents.push(raceEvent);
     this.points = this.points + raceEvent.points;
 
     this.raceEventService
       .saveRaceEvent(
-        raceEvent.id,
+        raceEvent.seconds,
+        raceEvent.eventTypeId,
         this.activePilot.id,
         this.tournamentService.activeTournament.id,
         this.activePilot.lastRaceIndex
@@ -56,7 +58,6 @@ export class RaceService {
     this.pilotService.getPilotById(pilotId).subscribe(pilot => {
       this.activePilot = pilot[0];
       this.activePilot.lastRaceIndex = this.activePilot.lastRaceIndex + 1;
-      console.log(this.activePilot.lastRaceIndex);
       this.pilotService
         .updatePilotTryCount(
           this.activePilot.id,

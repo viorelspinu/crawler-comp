@@ -65,7 +65,7 @@ function Dao() {
     let pilotId = req.query.pilotId;
     connection.acquire(function (err, con) {
       con.query(
-        'SELECT t.name, t.points, e.race_index as raceIndex FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index',
+        'SELECT t.name, t.points, e.race_index as raceIndex, e.seconds FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index',
         [pilotId],
         function (err, result1) {
           con.query("SELECT MAX(id) FROM pilot",
@@ -147,11 +147,12 @@ function Dao() {
       let pilotId = req.body.pilotId;
       let tournamentId = req.body.tournamentId;
       let raceId = req.body.raceId;
+      let seconds = req.body.seconds;
 
       console.log(raceId);
 
       con.query(
-        'INSERT INTO race_event(race_event_type_id, tournament_id, pilot_id, race_index) VALUES(?, ?, ?, ?)',
+        'INSERT INTO race_event(race_event_type_id, tournament_id, pilot_id, race_index, seconds) VALUES(?, ?, ?, ?, ?)',
         [raceEventTypeId, tournamentId, pilotId, raceId],
         function (err, result) {
           let insertId = result.insertId;

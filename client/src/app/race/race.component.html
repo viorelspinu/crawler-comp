@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
-            <div *ngIf="raceService.activePilot.name" class='text-center'>
+            <div *ngIf="raceService.activePilot" class='text-center'>
 
                 <div class='pt-3'>
                     Race
@@ -26,15 +26,15 @@
 
 <div class="card mt-2">
     <div class="card-body text-center">
-        <div style='width:40%' class='badge badge-secondary p-auto mr-3'>
-            <h2>
+        <div style='width:40%;' class='badge badge-warning p-auto mr-3 h-100 justify-content-center'>
+            <h3 class="mt-1">
                 {{raceService.points}}
-            </h2>
+            </h3>
         </div>
-        <div style='width:40%' class='badge badge-secondary p-auto ml-3'>
-            <h2>
-                360
-            </h2>
+        <div style='width:40%;' class='badge badge-secondary p-auto ml-3'>
+            <h3 class="mt-1">
+                {{seconds}}
+            </h3>
         </div>
     </div>
 </div>
@@ -42,11 +42,11 @@
 <div class="card mt-2">
     <div class="card-body">
         <div class='mt-1 text-center'>
-            <button *ngFor='let raceEvent of raceEventService.raceEventTypes; ' 
-            class="btn btn-primary m-3" style='width:160px !important;'
-                (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
-                {{raceEvent.name}} ({{raceEvent.points}})
-            </button>
+            <div *ngFor='let raceEvent of raceEventService.raceEventTypes; '>
+                <button class="btn btn-primary m-2" style='width:160px !important;' (click)="addRaceEvent(raceEvent.id, raceEvent.points, raceEvent.name);">
+                    {{raceEvent.name}} ({{raceEvent.points}})
+                </button>
+            </div>
 
             <button class="btn btn-light btn-block" (click)="removeLastRaceEvent();">
                 Undo last event
@@ -64,14 +64,11 @@
         </h5>
 
         <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
             <tbody>
                 <tr *ngFor='let raceEvent of raceService.raceEvents'>
+                    <td>
+                        {{raceEvent.seconds}}
+                    </td>
                     <td>
                         {{raceEvent.name}}
                     </td>

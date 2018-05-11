@@ -30,6 +30,7 @@ export class RaceEventService {
   }
 
   saveRaceEvent(
+    seconds: number,
     raceEventTypeId: number,
     pilotId: number,
     tournamentId: number,

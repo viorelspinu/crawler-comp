@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TournamentService } from '../tournament.service';
 import { Tournament } from '../tournament';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +12,16 @@ export class DashboardComponent implements OnInit {
   closedTournaments: Tournament[] = [];
   inProgressTournaments: Tournament[] = [];
 
-  constructor(private tournamentService: TournamentService) {}
+  constructor(
+    private tournamentService: TournamentService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
+    // force to HTTP, as the server on Amazon does not have HTTS
+    if (location.protocol === 'https:') {
+      location.protocol = 'http';
+    }
     this.loadTournaments();
   }
 
