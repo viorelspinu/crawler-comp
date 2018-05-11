@@ -7,6 +7,7 @@ import { TournamentService } from '../tournament.service';
 import { Pilot } from '../pilot';
 import { Router } from '@angular/router';
 import { PilotRaceEvent } from '../pilot-race-event';
+import { PilotRaceTotal } from '../pilot-race-total';
 
 @Component({
   selector: 'app-pilot',
@@ -18,7 +19,7 @@ export class PilotComponent implements OnInit {
   rawPilotRaceEvents: PilotRaceEvent[];
 
   results: PilotRaceEvent[][];
-  resultsTotal: number[];
+  resultsTotal: PilotRaceTotal[];
 
   bestRaceIndex: number;
   bestRacePoints: number;
@@ -40,52 +41,41 @@ export class PilotComponent implements OnInit {
         .getPilotTournamentEvents(this.pilot.id)
         .subscribe(results => {
           console.log(results);
-          this.rawPilotRaceEvents = results;
+          this.rawPilotRaceEvents = results.raceEvents;
+          this.resultsTotal = results.raceTotals;
+          this.bestRaceIndex = results.bestRaceIndex;
+          this.bestRacePoints = results.bestRacePoints;
+
           this.computePilotResultsForDisplay();
         });
     });
   }
 
   computePilotResultsForDisplay(): void {
+    if (!this.rawPilotRaceEvents) {
+      return;
+    }
     if (this.rawPilotRaceEvents.length === 0) {
       return;
     }
 
     this.results = [];
-    this.resultsTotal = [];
-    this.bestRaceIndex = -1;
-    this.bestRacePoints = 9999999;
 
     let i = 0;
     let j = 0;
-    let total = 0;
     let raceIndex = this.rawPilotRaceEvents[0].raceIndex;
     this.results[0] = [];
 
     for (const event of this.rawPilotRaceEvents) {
       if (!(event.raceIndex === raceIndex)) {
-        if (total < this.bestRacePoints) {
-          this.bestRacePoints = total;
-          this.bestRaceIndex = raceIndex;
-        }
-
         raceIndex = event.raceIndex;
-        this.resultsTotal[i] = total;
-
-        total = 0;
         i++;
         this.results[i] = [];
         j = 0;
       }
-
       this.results[i][j] = event;
-      total = total + event.points;
+
       j++;
     }
-    if (total < this.bestRacePoints) {
-      this.bestRacePoints = total;
-      this.bestRaceIndex = raceIndex;
-    }
-    this.resultsTotal[i] = total;
   }
 }

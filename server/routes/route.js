@@ -11,16 +11,16 @@ module.exports = {
       dao.getAllPilots(req, res);
     });
 
-    app.get('/api/tournament', function(req, res) {
-      dao.getAllTournaments(res);
-    });
-
-    app.get('/api/tournament/active', function(req, res) {
-      dao.getActiveTournament(res);
-    });
-
     app.get('/api/tournament/results', function(req, res) {
       dao.getTournamentResultsForPilot(req, res);
+    });
+
+    app.get('/api/tournament/:id', function(req, res) {
+      dao.getTournamentById(req, res);
+    });
+
+    app.get('/api/tournament', function(req, res) {
+      dao.getAllTournaments(res);
     });
 
     app.get('/api/race-event-type', function(req, res) {

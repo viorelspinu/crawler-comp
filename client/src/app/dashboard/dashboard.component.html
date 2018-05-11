@@ -2,7 +2,7 @@
   <div class="card-body">
     <h5 class="card-title">Active Tournaments</h5>
     <div *ngFor='let tournament of inProgressTournaments'>
-      <a routerLink="/tournament">
+      <a routerLink="/tournament/{{tournament.id}}">
         {{tournament.name}}
       </a>
     </div>
@@ -12,6 +12,10 @@
 <div class="card mt-5">
   <div class="card-body">
     <h5 class="card-title">Finished Tournaments</h5>
-    <div *ngFor='let tournament of closedTournaments'> {{tournament.name}}</div>
+    <div *ngFor='let tournament of closedTournaments'>
+      <a routerLink="/tournament/{{tournament.id}}">
+          {{tournament.name}}
+        </a>
+    </div>
   </div>
 </div>

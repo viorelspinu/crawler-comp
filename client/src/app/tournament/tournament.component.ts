@@ -6,20 +6,19 @@ import { TournamentService } from '../tournament.service';
 import { RaceService } from '../race.service';
 import { Tournament } from '../tournament';
 import { Pilot } from '../pilot';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tournament',
   templateUrl: './tournament.component.html',
   styleUrls: ['./tournament.component.css']
 })
-export class TournamentComponent implements OnInit, AfterViewChecked {
-  tournamentName: string;
-  pilotName: string;
-  newTournamentCreated = -1;
+export class TournamentComponent implements OnInit {
   pilots: Pilot[] = [];
 
   constructor(
     private pilotService: PilotService,
+    private route: ActivatedRoute,
     private tournamentService: TournamentService,
     private raceService: RaceService,
     private renderer2: Renderer2
@@ -30,75 +29,18 @@ export class TournamentComponent implements OnInit, AfterViewChecked {
   }
 
   init(): void {
-    this.tournamentService.getActiveTournament().subscribe(t => {
-      if (this.tournamentService.activeTournament) {
-        this.pilotService
-          .getPilots(this.tournamentService.activeTournament.id)
-          .subscribe(pilots => {
-            this.pilots = pilots;
-            this.newTournamentCreated = 1;
-            if (this.pilots.length > 0) {
-              this.tournamentService.stillAddingPilots = false;
-            }
-          });
-      } else {
-        this.newTournamentCreated = 0;
-      }
-    });
-  }
-
-  ngAfterViewChecked() {
-    if (this.newTournamentCreated === 0) {
-      this.renderer2.selectRootElement('#tournamentName').focus();
-    }
-    if (this.newTournamentCreated === 1) {
-      if (this.tournamentService.stillAddingPilots) {
-        this.renderer2.selectRootElement('#pilotName').focus();
-      }
-    }
-  }
-
-  keydownOnPilotText(event): void {
-    if (event.keyCode === 13) {
-      this.addNewPilot();
-    }
-  }
-
-  setShowAddPilots(state: boolean): void {
-    this.tournamentService.stillAddingPilots = state;
-  }
-
-  addNewPilot(): void {
-    if (!this.pilotName) {
-      return;
-    }
-    this.pilotService
-      .savePilot(this.pilotName, this.tournamentService.activeTournament.id)
-      .subscribe(t => {
-        this.pilots.push(new Pilot(t, this.pilotName, 0));
-        this.pilotName = '';
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.tournamentService.getTournament(id).subscribe(t => {
+      this.tournamentService.activeTournament = t[0];
+      this.pilotService.getPilots(id).subscribe(pilots => {
+        this.pilots = pilots;
       });
+    });
   }
 
   endTournament(): void {
     this.tournamentService.endActiveTournament().subscribe(any => {
       this.init();
     });
-  }
-
-  saveNewTournament(): void {
-    if (!this.tournamentName) {
-      return;
-    }
-
-    this.tournamentService.saveTournament(this.tournamentName).subscribe(t => {
-      this.tournamentService
-        .getActiveTournament()
-        .subscribe(t1 => (this.newTournamentCreated = 1));
-    });
-  }
-
-  beginTournament(): void {
-    console.log('begin tournament');
   }
 }

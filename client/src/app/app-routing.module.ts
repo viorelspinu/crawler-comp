@@ -4,15 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RaceComponent } from './race/race.component';
 import { TournamentComponent } from './tournament/tournament.component';
+import { CreateNewTournamentComponent } from './create-new-tournament/create-new-tournament.component';
 import { PilotComponent } from './pilot/pilot.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'race', component: RaceComponent },
-  { path: 'tournament', component: TournamentComponent },
+  { path: 'tournament/:id', component: TournamentComponent },
   { path: 'pilot/:id', component: PilotComponent },
-  { path: 'race', component: RaceComponent }
+  { path: 'race', component: RaceComponent },
+  { path: 'new-tournament', component: CreateNewTournamentComponent }
 ];
 
 @NgModule({

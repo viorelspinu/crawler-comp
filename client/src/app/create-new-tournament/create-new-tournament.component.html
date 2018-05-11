@@ -1,0 +1,75 @@
+<div *ngIf="newTournamentCreated === 0">
+  <div class="card mt-5">
+    <div class="card-body">
+      <h5 class="card-title">Create new tournament</h5>
+
+      <div class='mt-4'>
+        <div class="form-group">
+          <label for="tournamentName">Tournament Name</label>
+
+          <input class="form-control" id="tournamentName" [(ngModel)]="tournamentName" placeholder="name" />
+
+          <button class='mt-3 btn btn-primary' (click)="saveNewTournament()">Create Tournament</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(newTournamentCreated === 1) && (tournamentService.activeTournament)">
+  <div class="card mt-5">
+    <div class="card-body">
+      <h5 class="card-title">Pilots for {{tournamentService.activeTournament.name}}
+      </h5>
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Races</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let pilot of pilots.reverse() '>
+            <td>
+              <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
+                  {{pilot.name}}
+                  </a>
+
+
+            </td>
+            <td>
+              {{pilot.lastRaceIndex}}
+            </td>
+
+            <td>
+              <button class='btn btn-light' (click)="raceService.startRaceForPilot(pilot.id)">Race</button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card mt-5">
+    <div class="card-body">
+      <h5 class="card-title">Add new pilot</h5>
+      <div class='mt-4'>
+        <div class="form-group">
+          <label for="pilotName">Pilot name</label>
+
+          <input class="form-control" (keydown)="keydownOnPilotText($event)" id="pilotName" [(ngModel)]="pilotName" placeholder="name"
+          />
+
+          <button class='mt-3 btn btn-primary' (click)="addNewPilot()">Add Pilot</button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

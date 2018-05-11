@@ -5,8 +5,9 @@
       <li [class.active]="router.url==='/dashboard'" class="nav-item">
         <a class="nav-link" routerLink="/dashboard">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li [class.active]="router.url==='/tournament'" class="nav-item">
-        <a class="nav-link" routerLink="/tournament">Active tournament</a>
+
+      <li *ngIf="tournamentService.activeTournament" [class.active]="router.url.startsWith('/tournament')" class="nav-item">
+        <a class="nav-link" routerLink="/tournament/{{tournamentService.activeTournament.id}}">Tournament</a>
       </li>
 
 

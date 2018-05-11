@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RaceService } from '../race.service';
+import { TournamentService } from '../tournament.service';
 import { RaceEventType } from '../race-event-type';
 import { RaceEvent } from '../race-event';
 import { RaceEventService } from '../race-event.service';
@@ -24,6 +25,7 @@ export class RaceComponent implements OnInit, OnDestroy {
   constructor(
     private raceService: RaceService,
     private raceEventService: RaceEventService,
+    private tournamentService: TournamentService,
     private router: Router,
     private route: ActivatedRoute
   ) {}

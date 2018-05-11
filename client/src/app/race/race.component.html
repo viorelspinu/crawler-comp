@@ -1,6 +1,6 @@
 <div class="card mt-5 mb-3" *ngIf="raceFinished">
     <div class="card-body">
-        <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament">Back to tournament</a>
+        <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
     </div>
 </div>
 
@@ -89,6 +89,6 @@
 
 <div class="card mt-5" *ngIf="raceFinished">
     <div class="card-body">
-        <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament">Back to tournament</a>
+        <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
     </div>
 </div>
