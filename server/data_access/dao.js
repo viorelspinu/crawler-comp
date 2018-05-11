@@ -66,7 +66,7 @@ function Dao() {
       con.query(
         'SELECT t.name, t.points, e.race_index as raceIndex, e.seconds FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index',
         [pilotId],
-        function(err, result1) {
+        function(err, result) {
           con.release();
           res.send(result);
         }
