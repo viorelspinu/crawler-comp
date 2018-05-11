@@ -40,7 +40,8 @@ export class RaceEventService {
       raceEventTypeId: raceEventTypeId,
       tournamentId: tournamentId,
       pilotId: pilotId,
-      raceId: raceId
+      raceId: raceId,
+      seconds: seconds
     });
   }
 }
