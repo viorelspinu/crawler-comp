@@ -8,7 +8,7 @@ function Dao() {
     connection.acquire(function(err, con) {
       let tournamentId = req.query.tournamentId;
       con.query(
-        'SELECT id, name, last_race_index as lastRaceIndex FROM pilot WHERE tournament_id = ? SORT BY last_race_index ASC',
+        'SELECT id, name, last_race_index as lastRaceIndex FROM pilot WHERE tournament_id = ? ORDER BY last_race_index ASC',
         [tournamentId],
         function(err, result) {
           con.release();
