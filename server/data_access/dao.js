@@ -6,8 +6,10 @@ connection.init();
 function Dao() {
   this.getAllPilots = function(res) {
     connection.acquire(function(err, con) {
+      let tournamentId = req.params.tournamentId;
       con.query(
-        'SELECT id, name, last_race_index as lastRaceIndex FROM pilot',
+        'SELECT id, name, last_race_index as lastRaceIndex FROM pilot WHERE tournament_id = ?',
+        [tournamentId],
         function(err, result) {
           con.release();
           res.send(result);
