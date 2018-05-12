@@ -12,6 +12,8 @@ import { PilotComponent } from './pilot/pilot.component';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateNewTournamentComponent } from './create-new-tournament/create-new-tournament.component';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { CreateNewTournamentComponent } from './create-new-tournament/create-new
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' 
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

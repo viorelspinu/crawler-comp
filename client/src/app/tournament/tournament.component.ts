@@ -7,6 +7,8 @@ import { RaceService } from '../race.service';
 import { Tournament } from '../tournament';
 import { Pilot } from '../pilot';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+
 
 @Component({
   selector: 'app-tournament',
