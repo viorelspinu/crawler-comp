@@ -28,7 +28,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     private tournamentService: TournamentService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (!this.raceService.activePilot) {
@@ -68,7 +68,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     this.raceStarted = true;
     this.raceFinished = true;
 
-    if (this.seconds > 5) {
+    if (this.seconds > 180) {
       const timeOverEvent = this.raceEventService.raceEventTypes.find(event => {
         return event.code === 'TIME_EVENT';
       });

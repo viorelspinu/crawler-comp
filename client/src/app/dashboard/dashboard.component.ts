@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TournamentService } from '../tournament.service';
 import { Tournament } from '../tournament';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +15,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private tournamentService: TournamentService,
-    private location: Location
-  ) {}
+    private location: Location,
+    private router: Router
+
+  ) { }
 
   ngOnInit() {
     // force to HTTP, as the server on Amazon does not have HTTS
@@ -23,6 +26,12 @@ export class DashboardComponent implements OnInit {
       location.protocol = 'http';
     }
     this.loadTournaments();
+  }
+
+  goCreateNewTournament(): void {
+    this.tournamentService.activeTournament = null;
+    this.router.navigateByUrl("/new-tournament");
+
   }
 
   loadTournaments(): void {

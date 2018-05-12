@@ -37,7 +37,7 @@
     <a class='mt-4 btn btn-link align-left' routerLink='/new-tournament'>Add More Pilots</a>
   </div>
 
-  <div *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)" class='mt-4' >
+  <div *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)" class='mt-4 align-right' >
     <button class='mt-4 btn btn-secondary align-right' (click)="endTournament() ">End Tournament</button>
   </div>
 

@@ -5,14 +5,14 @@
 
   </h2>
   <div>
-    <a class='btn btn-secondary mt-4 mb-4' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
+    <a *ngIf="tournamentService.activeTournament" class='btn btn-secondary mt-4 mb-4' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
   </div>
 </div>
 
 <div class="container" *ngIf="results">
 
   <div class='clearfix'>
-    <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
+    <a *ngIf="tournamentService.activeTournament" class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
   </div>
 
   <h2 class="card-title mt-2 mb-4" *ngIf="pilot">
@@ -51,6 +51,17 @@
         </h5>
 
         <table class="table">
+          <thead>
+            <th>
+              second
+            </th>
+            <th>
+              event
+            </th>
+            <th>
+              points
+            </th>
+          </thead>
           <tbody>
             <tr *ngFor='let event of resultList'>
               <td>
@@ -70,5 +81,5 @@
   </div>
 
 
-  <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
+  <a *ngIf="tournamentService.activeTournament" class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
 </div>
