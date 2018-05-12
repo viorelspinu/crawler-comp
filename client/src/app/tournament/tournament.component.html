@@ -23,7 +23,7 @@
             {{pilot.lastRaceIndex}}
           </td>
 
-          <td *ngIf="!tournamentService.activeTournament.finished">
+          <td *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)">
             <button class='btn btn-light' (click)="raceService.startRaceForPilot(pilot.id)">Race</button>
           </td>
 
@@ -33,9 +33,13 @@
   </div>
 
 
-  <div *ngIf="!tournamentService.activeTournament.finished" class='clearfix'>
+  <div *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)">
     <a class='mt-4 btn btn-link align-left' routerLink='/new-tournament'>Add More Pilots</a>
+  </div>
+
+  <div *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)" class='mt-4' >
     <button class='mt-4 btn btn-secondary align-right' (click)="endTournament() ">End Tournament</button>
   </div>
+
 
 </div>

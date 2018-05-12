@@ -1,16 +1,16 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+<nav [ngClass]="(tournamentService.isAdmin())?'navbar-light bg-light':'navbar-dark bg-dark'" class="navbar navbar-expand  fixed-top">
 
   <div class="" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li [class.active]="router.url==='/dashboard'" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/dashboard">Home
+          <span class="sr-only">(current)</span>
+        </a>
       </li>
 
       <li *ngIf="tournamentService.activeTournament" [class.active]="router.url.startsWith('/tournament')" class="nav-item">
-        <a class="nav-link" routerLink="/tournament/{{tournamentService.activeTournament.id}}">Tournament</a>
+        <a class="nav-link" routerLink="/tournament/{{tournamentService.activeTournament.id}}">{{tournamentService.activeTournament.name}}</a>
       </li>
-
-
     </ul>
 
   </div>

@@ -68,7 +68,7 @@ function Dao() {
     console.log(pilotId);
     connection.acquire(function(err, con) {
       con.query(
-        'SELECT t.name, t.points, e.race_index AS raceIndex, e.seconds FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index',
+        'SELECT t.name, t.points, e.race_index AS raceIndex, e.seconds FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=? ORDER BY e.race_index, e.seconds',
         [pilotId],
         function(err1, result1) {
           con.query(

@@ -16,7 +16,17 @@ export class TournamentService {
   private activeTournamentsUrl = '/api/tournament/active';
   private resultsUrl = '/api/tournament/results';
 
+  tournamentAdminCounter = 0;
   activeTournament: Tournament;
+
+
+  isAdmin() {
+    return this.tournamentAdminCounter > 5;
+  }
+
+  incAdminCounter():void{
+    this.tournamentAdminCounter++;
+  }
 
   constructor(
     private http: HttpClient,
