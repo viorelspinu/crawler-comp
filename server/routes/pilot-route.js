@@ -21,7 +21,10 @@ module.exports = {
       // sqlDao.getAllPilots(req, res);
 
       models.Pilot
-        .findAll({ where: { tournamentId: req.query.tournamentId } })
+        .findAll(
+          { where: { tournamentId: req.query.tournamentId } },
+          { order: 'lastRaceIndex ASC' }
+        )
         .then(pilots => {
           res.send(pilots);
         })
