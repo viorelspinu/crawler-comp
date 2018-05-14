@@ -36,7 +36,7 @@ export class PilotComponent implements OnInit {
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.pilotService.getPilotById(id).subscribe(pilot => {
-      this.pilot = pilot[0];
+      this.pilot = pilot;
       this.tournamentService
         .getPilotTournamentEvents(this.pilot.id)
         .subscribe(results => {

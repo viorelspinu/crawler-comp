@@ -25,8 +25,8 @@ export class PilotService {
     );
   }
 
-  getPilotById(pilotId: number): Observable<Pilot[]> {
-    return this.http.get<Pilot[]>(this.pilotsUrl + '/' + pilotId);
+  getPilotById(pilotId: number): Observable<Pilot> {
+    return this.http.get<Pilot>(this.pilotsUrl + '/' + pilotId);
   }
 
   savePilot(pilotName: string, tournamentId: number): Observable<number> {
