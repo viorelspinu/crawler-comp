@@ -7,6 +7,7 @@ var basename = path.basename(__filename);
 var env = process.env.NODE_ENV || 'development';
 var db = {};
 
+const Op = Sequelize.Op;
 var sequelize = new Sequelize(
   'mysql://' +
     process.env.DB_USER +
@@ -16,10 +17,18 @@ var sequelize = new Sequelize(
     process.env.DB_URL +
     ':3306/' +
     process.env.DB_NAME,
-  { dialect: 'mysql' }
+  { dialect: 'mysql' },
+  { operatorsAliases: Op },
+  {
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    }
+  }
 );
 
-console.log("sequelize instance created");
+console.log('sequelize instance created');
 
 fs
   .readdirSync(__dirname)
