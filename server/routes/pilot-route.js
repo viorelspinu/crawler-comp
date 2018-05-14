@@ -20,11 +20,13 @@ module.exports = {
     app.get('/api/pilot', function(req, res) {
       // sqlDao.getAllPilots(req, res);
 
+      console.log('------------------------');
+
       models.Pilot
-        .findAll(
-          { where: { tournamentId: req.query.tournamentId } },
-          { order: 'lastRaceIndex ASC' }
-        )
+        .findAll({
+          where: { tournamentId: req.query.tournamentId },
+          order: [['lastRaceIndex', 'ASC']]
+        })
         .then(pilots => {
           res.send(pilots);
         })
