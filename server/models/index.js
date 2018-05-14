@@ -17,15 +17,7 @@ var sequelize = new Sequelize(
     process.env.DB_URL +
     ':3306/' +
     process.env.DB_NAME,
-  { dialect: 'mysql' },
-  { operatorsAliases: Op },
-  {
-    pool: {
-      max: 5,
-      min: 0,
-      idle: 10000
-    }
-  }
+  { dialect: 'mysql', operatorsAliases: Op }
 );
 
 console.log('sequelize instance created');
