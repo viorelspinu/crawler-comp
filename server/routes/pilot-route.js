@@ -6,9 +6,9 @@ module.exports = {
   configure: function(app) {
     app.get('/api/pilot/:id', function(req, res) {
       //sqlDao.getPilotById(req, res);
-      const id = req.params.id;
+
       models.Pilot
-        .findById(id)
+        .findById(req.params.id)
         .then(pilot => {
           res.send(pilot);
         })
@@ -19,9 +19,9 @@ module.exports = {
 
     app.get('/api/pilot', function(req, res) {
       // sqlDao.getAllPilots(req, res);
-      const tournamentId = req.query.tournamentId;
+
       models.Pilot
-        .findAll({ where: { tournamentId: tournamentId } })
+        .findAll({ where: { tournamentId: req.query.tournamentId } })
         .then(pilots => {
           res.send(pilots);
         })
@@ -32,14 +32,12 @@ module.exports = {
 
     app.post('/api/pilot', function(req, res) {
       //sqlDao.savePilot(req, res);
-      let name = req.body.pilotName;
-      let tournamentId = req.body.tournamentId;
 
       const pilot = models.Pilot
         .create({
-          name: name,
+          name: req.body.pilotName,
           lastRaceIndex: 0,
-          tournamentId: tournamentId
+          tournamentId: req.body.tournamentId
         })
         .then(pilot => {
           res.send(pilot.id);
@@ -51,13 +49,12 @@ module.exports = {
 
     app.patch('/api/pilot/:id', function(req, res) {
       //sqlDao.patchPilot(req, res);
-      const id = req.params.id;
-      let lastRaceIndex = req.body.lastRaceIndex;
+
       models.Pilot.update(
-        { lastRaceIndex: lastRaceIndex },
+        { lastRaceIndex: req.body.lastRaceIndex },
         {
           where: {
-            id: id
+            id: req.params.id
           }
         }
       );
