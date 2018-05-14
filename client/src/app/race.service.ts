@@ -56,7 +56,7 @@ export class RaceService {
 
   startRaceForPilot(pilotId: number): void {
     this.pilotService.getPilotById(pilotId).subscribe(pilot => {
-      this.activePilot = pilot[0];
+      this.activePilot = pilot;
       this.activePilot.lastRaceIndex = this.activePilot.lastRaceIndex + 1;
       this.pilotService
         .updatePilotTryCount(

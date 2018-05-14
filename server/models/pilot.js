@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var Pilot = sequelize.define(
     'Pilot',
     {
-      id: { type: DataTypes.INTEGER, primaryKey: true },
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: DataTypes.STRING,
       lastRaceIndex: {
         type: DataTypes.INTEGER,

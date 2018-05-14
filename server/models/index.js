@@ -19,6 +19,8 @@ var sequelize = new Sequelize(
   { dialect: 'mysql' }
 );
 
+console.log("sequelize instance created");
+
 fs
   .readdirSync(__dirname)
   .filter(file => {
