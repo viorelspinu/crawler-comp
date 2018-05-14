@@ -23,11 +23,11 @@ export class RaceComponent implements OnInit, OnDestroy {
   raceFinished = false;
 
   constructor(
-    private raceService: RaceService,
-    private raceEventService: RaceEventService,
-    private tournamentService: TournamentService,
-    private router: Router,
-    private route: ActivatedRoute
+    public raceService: RaceService,
+    public raceEventService: RaceEventService,
+    public tournamentService: TournamentService,
+    public router: Router,
+    public route: ActivatedRoute
   ) { }
 
   ngOnInit() {

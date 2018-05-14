@@ -19,15 +19,15 @@ export class RaceService {
   activePilot: Pilot;
   raceIndex = 0;
 
-  private raceUrl = '/api/race';
+  raceUrl = '/api/race';
 
   constructor(
-    private raceEventService: RaceEventService,
-    private tournamentService: TournamentService,
-    private http: HttpClient,
-    private configurationService: ConfigurationService,
-    private pilotService: PilotService,
-    private router: Router
+    public raceEventService: RaceEventService,
+    public tournamentService: TournamentService,
+    public http: HttpClient,
+    public configurationService: ConfigurationService,
+    public pilotService: PilotService,
+    public router: Router
   ) {
     this.raceUrl = this.configurationService.baseURL + this.raceUrl;
   }

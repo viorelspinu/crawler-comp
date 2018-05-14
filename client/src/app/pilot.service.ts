@@ -9,12 +9,12 @@ import { TournamentService } from './tournament.service';
   providedIn: 'root'
 })
 export class PilotService {
-  private pilotsUrl = '/api/pilot';
+  pilotsUrl = '/api/pilot';
 
   constructor(
-    private http: HttpClient,
-    private configurationService: ConfigurationService,
-    private tournamentService: TournamentService
+    public http: HttpClient,
+    public configurationService: ConfigurationService,
+    public tournamentService: TournamentService
   ) {
     this.pilotsUrl = configurationService.baseURL + this.pilotsUrl;
   }

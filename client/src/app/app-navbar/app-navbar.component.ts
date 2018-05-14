@@ -9,12 +9,9 @@ import { Router } from '@angular/router';
 })
 export class AppNavbarComponent implements OnInit {
   constructor(
-    private tournamentService: TournamentService,
-    private router: Router
+    public tournamentService: TournamentService,
+    public router: Router
   ) {}
 
   ngOnInit() {}
-
-
-
 }

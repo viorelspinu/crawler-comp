@@ -3,7 +3,7 @@ rm ./crawler-comp-web/ -rf
 #heroku login
 heroku git:clone -a crawler-comp-web
 cd crawler-comp/client/
-ng build
+ng build --prod --build-optimizer --aot
 cp ./dist/crawler-comp/* ../../crawler-comp-web/web/ -rf
 cd ..
 cd ..

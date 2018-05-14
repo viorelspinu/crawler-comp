@@ -25,12 +25,12 @@ export class PilotComponent implements OnInit {
   bestRacePoints: number;
 
   constructor(
-    private route: ActivatedRoute,
-    private pilotService: PilotService,
-    private raceService: RaceService,
-    private tournamentService: TournamentService,
-    private location: Location,
-    private router: Router
+    public route: ActivatedRoute,
+    public pilotService: PilotService,
+    public raceService: RaceService,
+    public tournamentService: TournamentService,
+    public location: Location,
+    public router: Router
   ) {}
 
   ngOnInit() {

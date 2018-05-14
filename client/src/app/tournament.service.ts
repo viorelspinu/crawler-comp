@@ -12,25 +12,24 @@ import { PilotTournamentResults } from './pilot-tournament-results';
   providedIn: 'root'
 })
 export class TournamentService {
-  private tournamentsUrl = '/api/tournament';
-  private activeTournamentsUrl = '/api/tournament/active';
-  private resultsUrl = '/api/tournament/results';
+  tournamentsUrl = '/api/tournament';
+  activeTournamentsUrl = '/api/tournament/active';
+  resultsUrl = '/api/tournament/results';
 
   tournamentAdminCounter = 0;
   activeTournament: Tournament;
-
 
   isAdmin() {
     return this.tournamentAdminCounter > 5;
   }
 
-  incAdminCounter():void{
+  incAdminCounter(): void {
     this.tournamentAdminCounter++;
   }
 
   constructor(
-    private http: HttpClient,
-    private configurationService: ConfigurationService
+    public http: HttpClient,
+    public configurationService: ConfigurationService
   ) {
     this.tournamentsUrl =
       this.configurationService.baseURL + this.tournamentsUrl;

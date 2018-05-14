@@ -8,14 +8,14 @@ import { ConfigurationService } from './configuration.service';
   providedIn: 'root'
 })
 export class RaceEventService {
-  private raceEventTypeUrl = '/api/race-event-type';
-  private raceEventUrl = '/api/race-event';
+  raceEventTypeUrl = '/api/race-event-type';
+  raceEventUrl = '/api/race-event';
 
   raceEventTypes: RaceEventType[] = [];
 
   constructor(
-    private http: HttpClient,
-    private configurationService: ConfigurationService
+    public http: HttpClient,
+    public configurationService: ConfigurationService
   ) {
     this.raceEventTypeUrl =
       this.configurationService.baseURL + this.raceEventTypeUrl;

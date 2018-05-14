@@ -20,11 +20,11 @@ export class CreateNewTournamentComponent implements OnInit {
   pilots: Pilot[] = [];
 
   constructor(
-    private pilotService: PilotService,
-    private route: ActivatedRoute,
-    private tournamentService: TournamentService,
-    private raceService: RaceService,
-    private renderer2: Renderer2
+    public pilotService: PilotService,
+    public route: ActivatedRoute,
+    public tournamentService: TournamentService,
+    public raceService: RaceService,
+    public renderer2: Renderer2
   ) {}
 
   ngOnInit() {

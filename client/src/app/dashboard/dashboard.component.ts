@@ -14,9 +14,9 @@ export class DashboardComponent implements OnInit {
   inProgressTournaments: Tournament[] = [];
 
   constructor(
-    private tournamentService: TournamentService,
-    private location: Location,
-    private router: Router
+    public tournamentService: TournamentService,
+    public location: Location,
+    public router: Router
 
   ) { }
 

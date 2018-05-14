@@ -9,9 +9,7 @@ import { TournamentService } from './tournament.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private tournamentService: TournamentService) {}
+  constructor(public tournamentService: TournamentService) {}
 
   ngOnInit() {}
-
-  
 }
