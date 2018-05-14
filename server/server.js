@@ -25,6 +25,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(bodyparser.json());
 
+app.set('models', require('./models'));
+
 pilotRoutes.configure(app);
 tournamentRoutes.configure(app);
 raceRoutes.configure(app);

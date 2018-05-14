@@ -1,9 +1,10 @@
 //custom route for fetching data
 var sqlDao = require('../data_access/dao');
-var models = require('../models');
 
 module.exports = {
   configure: function(app) {
+    var models = app.get('models');
+
     app.get('/api/pilot/:id', function(req, res) {
       //sqlDao.getPilotById(req, res);
 
@@ -19,8 +20,6 @@ module.exports = {
 
     app.get('/api/pilot', function(req, res) {
       // sqlDao.getAllPilots(req, res);
-
-      console.log('------------------------');
 
       models.Pilot
         .findAll({
