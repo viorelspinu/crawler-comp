@@ -70,7 +70,7 @@ export class CreateNewTournamentComponent implements OnInit {
     this.tournamentService.saveTournament(this.tournamentName).subscribe(t => {
       this.tournamentService.getTournament(t).subscribe(t1 => {
         this.newTournamentCreated = 1;
-        this.tournamentService.activeTournament = t1[0];
+        this.tournamentService.activeTournament = t1;
       });
     });
   }

@@ -20,7 +20,7 @@ export class TournamentService {
   activeTournament: Tournament;
 
   isAdmin() {
-    return this.tournamentAdminCounter > 5;
+    return this.tournamentAdminCounter > 1;
   }
 
   incAdminCounter(): void {
@@ -42,8 +42,8 @@ export class TournamentService {
     return this.http.get<Tournament[]>(this.tournamentsUrl);
   }
 
-  getTournament(id: number): Observable<Tournament[]> {
-    return this.http.get<Tournament[]>(this.tournamentsUrl + '/' + id);
+  getTournament(id: number): Observable<Tournament> {
+    return this.http.get<Tournament>(this.tournamentsUrl + '/' + id);
   }
 
   getPilotTournamentEvents(

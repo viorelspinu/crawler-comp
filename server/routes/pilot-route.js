@@ -3,7 +3,7 @@ var sqlDao = require('../data_access/dao');
 
 module.exports = {
   configure: function(app) {
-    var models = app.get('models');
+    const models = app.get('models');
 
     app.get('/api/pilot/:id', function(req, res) {
       //sqlDao.getPilotById(req, res);
@@ -11,7 +11,7 @@ module.exports = {
       models.Pilot
         .findById(req.params.id)
         .then(pilot => {
-          res.send(pilot);
+          res.json(pilot);
         })
         .catch(err => {
           console.log(err);
@@ -27,7 +27,7 @@ module.exports = {
           order: [['lastRaceIndex', 'ASC']]
         })
         .then(pilots => {
-          res.send(pilots);
+          res.json(pilots);
         })
         .catch(err => {
           console.log(err);
@@ -44,7 +44,7 @@ module.exports = {
           tournamentId: req.body.tournamentId
         })
         .then(pilot => {
-          res.send(pilot.id);
+          res.json(pilot.id);
         })
         .catch(err => {
           console.log(err);
@@ -54,14 +54,21 @@ module.exports = {
     app.patch('/api/pilot/:id', function(req, res) {
       //sqlDao.patchPilot(req, res);
 
-      models.Pilot.update(
-        { lastRaceIndex: req.body.lastRaceIndex },
-        {
-          where: {
-            id: req.params.id
+      models.Pilot
+        .update(
+          { lastRaceIndex: req.body.lastRaceIndex },
+          {
+            where: {
+              id: req.params.id
+            }
           }
-        }
-      );
+        )
+        .then(p => {
+          res.json(p.id);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     });
   }
 };
