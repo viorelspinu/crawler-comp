@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Tournament.associate = function(models) {
-    // associations can be defined here
+    Tournament.hasMany(models.Pilot);
   };
   return Tournament;
 };

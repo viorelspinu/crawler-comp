@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       lastRaceIndex: {
         type: DataTypes.INTEGER,
         field: 'last_race_index'
-      },
-      tournamentId: {
-        type: DataTypes.INTEGER,
-        field: 'tournament_id'
       }
     },
     {
@@ -21,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Pilot.associate = function(models) {
-    // associations can be defined here
+    Pilot.belongsTo(models.Tournament);
   };
   return Pilot;
 };

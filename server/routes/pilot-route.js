@@ -23,7 +23,12 @@ module.exports = {
 
       models.Pilot
         .findAll({
-          where: { tournamentId: req.query.tournamentId },
+          include: [
+            {
+              model: models.Tournament,
+              where: { id: req.query.tournamentId }
+            }
+          ],
           order: [['lastRaceIndex', 'ASC']]
         })
         .then(pilots => {
