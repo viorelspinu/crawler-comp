@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 
-import { PilotService } from '../pilot.service';
-import { TournamentService } from '../tournament.service';
-import { RaceService } from '../race.service';
-import { Tournament } from '../tournament';
-import { Pilot } from '../pilot';
+import { PilotService } from '../../service/pilot.service';
+import { TournamentService } from '../../service/tournament.service';
+import { RaceService } from '../../service/race.service';
+import { Tournament } from '../../model/tournament';
+import { Pilot } from '../../model/pilot';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

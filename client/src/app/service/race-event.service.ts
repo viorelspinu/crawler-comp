@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RaceEventType } from './race-event-type';
+import { RaceEventType } from '../model/race-event-type';
 import { ConfigurationService } from './configuration.service';
 
 @Injectable({

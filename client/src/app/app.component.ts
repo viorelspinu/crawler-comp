@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TournamentService } from './tournament.service';
+import { TournamentService } from './service/tournament.service';
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RaceService } from '../race.service';
-import { TournamentService } from '../tournament.service';
-import { RaceEventType } from '../race-event-type';
-import { RaceEvent } from '../race-event';
-import { RaceEventService } from '../race-event.service';
-import { Pilot } from '../pilot';
+import { RaceService } from '../../service/race.service';
+import { TournamentService } from '../../service/tournament.service';
+import { RaceEventType } from '../../model/race-event-type';
+import { RaceEvent } from '../../model/race-event';
+import { RaceEventService } from '../../service/race-event.service';
+import { Pilot } from '../../model/pilot';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -28,7 +28,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     public tournamentService: TournamentService,
     public router: Router,
     public route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (!this.raceService.activePilot) {

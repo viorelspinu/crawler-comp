@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { PilotService } from '../pilot.service';
-import { RaceService } from '../race.service';
-import { TournamentService } from '../tournament.service';
-import { Pilot } from '../pilot';
 import { Router } from '@angular/router';
-import { PilotRaceEvent } from '../pilot-race-event';
-import { PilotRaceTotal } from '../pilot-race-total';
+
+import { PilotService } from '../../service/pilot.service';
+import { RaceService } from '../../service/race.service';
+import { TournamentService } from '../../service/tournament.service';
+import { Pilot } from '../../model/pilot';
+import { PilotRaceEvent } from '../../model/pilot-race-event';
+import { PilotRaceTotal } from '../../model/pilot-race-total';
 
 @Component({
   selector: 'app-pilot',

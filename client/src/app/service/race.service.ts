@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RaceEventType } from './race-event-type';
-import { RaceEvent } from './race-event';
-import { Pilot } from './pilot';
+import { RaceEventType } from '../model/race-event-type';
+import { RaceEvent } from '../model/race-event';
+import { Pilot } from '../model/pilot';
 import { RaceEventService } from './race-event.service';
 import { PilotService } from './pilot.service';
 import { TournamentService } from './tournament.service';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Pilot } from './pilot';
+import { Pilot } from '../model/pilot';
 import { ConfigurationService } from './configuration.service';
 import { TournamentService } from './tournament.service';
 

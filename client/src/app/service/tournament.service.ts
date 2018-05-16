@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RaceEventType } from './race-event-type';
-import { Tournament } from './tournament';
+import { RaceEventType } from '../model/race-event-type';
+import { Tournament } from '../model/tournament';
 import { ConfigurationService } from './configuration.service';
 import { catchError, map, tap } from 'rxjs/operators';
-import { PilotRaceEvent } from './pilot-race-event';
-import { PilotTournamentResults } from './pilot-tournament-results';
+import { PilotRaceEvent } from '../model/pilot-race-event';
+import { PilotTournamentResults } from '../model/pilot-tournament-results';
 
 @Injectable({
   providedIn: 'root'

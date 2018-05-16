@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TournamentService } from '../tournament.service';
-import { Tournament } from '../tournament';
+import { TournamentService } from '../../service/tournament.service';
+import { Tournament } from '../../model/tournament';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -17,8 +17,7 @@ export class DashboardComponent implements OnInit {
     public tournamentService: TournamentService,
     public location: Location,
     public router: Router
-
-  ) { }
+  ) {}
 
   ngOnInit() {
     // force to HTTP, as the server on Amazon does not have HTTS
@@ -30,8 +29,7 @@ export class DashboardComponent implements OnInit {
 
   goCreateNewTournament(): void {
     this.tournamentService.activeTournament = null;
-    this.router.navigateByUrl("/new-tournament");
-
+    this.router.navigateByUrl('/new-tournament');
   }
 
   loadTournaments(): void {

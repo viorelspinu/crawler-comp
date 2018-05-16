@@ -3,17 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { RaceComponent } from './race/race.component';
+import { RaceComponent } from './component/race/race.component';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { TournamentComponent } from './tournament/tournament.component';
-import { PilotComponent } from './pilot/pilot.component';
-import { AppNavbarComponent } from './app-navbar/app-navbar.component';
+import { TournamentComponent } from './component/tournament/tournament.component';
+import { PilotComponent } from './component/pilot/pilot.component';
+import { AppNavbarComponent } from './component/app-navbar/app-navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CreateNewTournamentComponent } from './create-new-tournament/create-new-tournament.component';
+import { CreateNewTournamentComponent } from './component/create-new-tournament/create-new-tournament.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-
 
 @NgModule({
   declarations: [
@@ -32,7 +31,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     AppRoutingModule,
     NgbModule.forRoot(),
     ConfirmationPopoverModule.forRoot({
-      confirmButtonType: 'danger' 
+      confirmButtonType: 'danger'
     })
   ],
   providers: [],
