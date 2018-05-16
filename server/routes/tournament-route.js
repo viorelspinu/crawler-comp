@@ -22,7 +22,7 @@ module.exports = {
       );
 
       const promise3 = models.sequelize.query(
-        'SELECT MIN(totalPoints) AS bestPoints, races.race_index AS ind FROM (SELECT SUM(t.points) as totalPoints, e.race_index FROM race_event e, race_event_type t WHERE (e.race_event_type_id=t.id) AND (pilot_id=:pilotId) GROUP BY race_index ORDER BY race_index) as races',
+        'SELECT SUM(t.points) as totalPoints, e.race_index as raceIndex FROM race_event e, race_event_type t WHERE (e.race_event_type_id=t.id) AND (pilot_id=:pilotId) GROUP BY race_index ORDER BY totalPoints ASC LIMIT 1',
         {
           replacements: { pilotId: pilotId },
           type: models.sequelize.QueryTypes.SELECT
@@ -41,8 +41,11 @@ module.exports = {
         result2.pilotId = pilotId;
         returnObj.raceTotals = result2;
 
-        returnObj.bestRaceIndex = result3[0].ind;
-        returnObj.bestRacePoints = result3[0].bestPoints;
+        console.log(result2);
+        console.log(result3);
+
+        returnObj.bestRaceIndex = result3[0].raceIndex;
+        returnObj.bestRacePoints = result3[0].totalPoints;
 
         res.send(returnObj);
       });
