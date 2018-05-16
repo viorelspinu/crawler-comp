@@ -16,8 +16,6 @@ this.init = function() {
   });  
 };  
 
-console.log("session secret is:", );
-
 // acquire connection and execute query on callbacks  
 this.acquire = function(callback) { 
   this.pool.getConnection(function(err, connection) {  
