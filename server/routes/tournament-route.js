@@ -41,9 +41,6 @@ module.exports = {
         result2.pilotId = pilotId;
         returnObj.raceTotals = result2;
 
-        console.log(result2);
-        console.log(result3);
-
         returnObj.bestRaceIndex = result3[0].raceIndex;
         returnObj.bestRacePoints = result3[0].totalPoints;
 
