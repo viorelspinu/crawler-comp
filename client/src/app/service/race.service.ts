@@ -54,19 +54,19 @@ export class RaceService {
     }
   }
 
-  startRaceForPilot(pilotId: number): void {
+  viewStartRaceForPilot(pilotId: number): void {
     this.pilotService.getPilotById(pilotId).subscribe(pilot => {
       this.activePilot = pilot;
-      this.activePilot.lastRaceIndex = this.activePilot.lastRaceIndex + 1;
-      this.pilotService
-        .updatePilotTryCount(
-          this.activePilot.id,
-          this.activePilot.lastRaceIndex
-        )
-        .subscribe();
       this.raceEvents = [];
       this.points = 0;
       this.router.navigateByUrl('/race');
     });
+  }
+
+  startRaceForActivePilot(): void {
+    this.activePilot.lastRaceIndex = this.activePilot.lastRaceIndex + 1;
+    this.pilotService
+      .updatePilotTryCount(this.activePilot.id, this.activePilot.lastRaceIndex)
+      .subscribe();
   }
 }

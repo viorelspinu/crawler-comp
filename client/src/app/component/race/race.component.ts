@@ -54,6 +54,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     this.clockSubscription = this.clock$.subscribe(t => (this.seconds = t));
     this.raceStarted = true;
     this.raceFinished = false;
+    this.raceService.startRaceForActivePilot();
   }
 
   finishRace(): void {

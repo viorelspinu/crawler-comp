@@ -18,8 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'tournament'
     }
   );
-  Tournament.associate = function(models) {
-    Tournament.hasMany(models.Pilot);
-  };
+  Tournament.associate = function(models) {};
   return Tournament;
 };

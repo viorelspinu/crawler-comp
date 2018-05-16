@@ -20,8 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'pilot'
     }
   );
-  Pilot.associate = function(models) {
-    Pilot.belongsTo(models.Tournament, {foreignKey: 'tournamentId', targetKey: 'id'});
-  };
+  Pilot.associate = function(models) {};
   return Pilot;
 };
