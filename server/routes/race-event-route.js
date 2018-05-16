@@ -1,12 +1,8 @@
-//custom route for fetching data
-var sqlDao = require('../data_access/dao');
-var models = require('../models');
-
 module.exports = {
   configure: function(app) {
-    app.get('/api/race-event-type', function(req, res) {
-      //sqlDao.getAllRaceEventTypes(res);
+    const models = app.get('models');
 
+    app.get('/api/race-event-type', function(req, res) {
       models.RaceEventType
         .findAll()
         .then(t => {
@@ -18,8 +14,6 @@ module.exports = {
     });
 
     app.post('/api/race-event', function(req, res) {
-      //sqlDao.saveRaceEvent(req, res);
-
       const raceEvent = models.RaceEvent
         .create({
           raceEventTypeId: req.body.raceEventTypeId,
