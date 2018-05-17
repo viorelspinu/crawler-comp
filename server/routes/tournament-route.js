@@ -5,13 +5,11 @@ module.exports = {
     app.get('/api/tournament/results', function(req, res) {
       const pilotId = +req.query.pilotId;
 
-      const promise1 = models.sequelize.query(
-        'SELECT t.name, t.points, e.race_index AS raceIndex, e.seconds FROM race_event e, race_event_type t WHERE e.race_event_type_id = t.id AND e.pilot_id=:pilotId ORDER BY e.race_index, e.seconds',
-        {
-          replacements: { pilotId: pilotId },
-          type: models.sequelize.QueryTypes.SELECT
-        }
-      );
+      const promise1 = models.RaceEvent.findAll({
+        where: { pilotId: pilotId },
+        include: [models.RaceEventType],
+        order: [['raceIndex', 'ASC'], ['seconds', 'ASC']]
+      });
 
       const promise2 = models.Race.findAll({
         where: { pilotId: pilotId },
@@ -28,19 +26,30 @@ module.exports = {
         result2,
         result3
       ) {
+        let rawResults = [];
+
+        result1.forEach(item => {
+          let rawResult = new Object();
+
+          rawResult.name = item.RaceEventType.name;
+          rawResult.points = item.RaceEventType.points;
+          rawResult.raceIndex = item.dataValues.raceIndex;
+          rawResult.seconds = item.dataValues.seconds;
+
+          rawResults.push(rawResult);
+        });
+
         let returnObj = new Object();
         returnObj.pilotId = pilotId;
-        returnObj.raceEvents = result1;
+        returnObj.raceEvents = rawResults;
 
         result2.pilotId = pilotId;
         returnObj.raceTotals = result2;
 
-        console.log(result3);
-
         returnObj.bestRaceIndex = result3.index;
         returnObj.bestRacePoints = result3.points;
 
-        res.send(returnObj);
+        res.json(returnObj);
       });
     });
 

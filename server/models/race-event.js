@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'race_event'
     }
   );
-  RaceEvent.associate = function(models) {};
+  RaceEvent.associate = function(models) {
+    RaceEvent.belongsTo(models.RaceEventType, {
+      foreignKey: 'race_event_type_id'
+    });
+  };
   return RaceEvent;
 };
