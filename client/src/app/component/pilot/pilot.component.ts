@@ -61,10 +61,7 @@ export class PilotComponent implements OnInit {
 
     this.results = [];
 
-    console.log(this.rawPilotRaceEvents);
-
     let i = 0;
-    let j = 0;
     let raceIndex = this.rawPilotRaceEvents[0].raceIndex;
     this.results[0] = [];
 
@@ -73,11 +70,8 @@ export class PilotComponent implements OnInit {
         raceIndex = event.raceIndex;
         i++;
         this.results[i] = [];
-        j = 0;
       }
-      this.results[i][j] = event;
-
-      j++;
+      this.results[i].push(event);
     }
   }
 }
