@@ -18,7 +18,6 @@ import { timer, Subscription } from 'rxjs';
 export class RaceComponent implements OnInit, OnDestroy {
   clock$: Observable<number>;
   clockSubscription: Subscription;
-  seconds = 0;
   raceStarted = false;
   raceFinished = false;
 
@@ -38,7 +37,7 @@ export class RaceComponent implements OnInit, OnDestroy {
 
   addRaceEvent(eventTypeId: number, points: number, name: string): void {
     this.raceService.addRaceEvent(
-      new RaceEvent(eventTypeId, this.seconds, points, name)
+      new RaceEvent(eventTypeId, this.raceService.raceDuration, points, name)
     );
   }
 
@@ -51,7 +50,9 @@ export class RaceComponent implements OnInit, OnDestroy {
       return;
     }
     this.clock$ = timer(0, 1000);
-    this.clockSubscription = this.clock$.subscribe(t => (this.seconds = t));
+    this.clockSubscription = this.clock$.subscribe(
+      t => (this.raceService.raceDuration = t)
+    );
     this.raceStarted = true;
     this.raceFinished = false;
     this.raceService.startRaceForActivePilot();
@@ -69,7 +70,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     this.raceStarted = true;
     this.raceFinished = true;
 
-    if (this.seconds > 180) {
+    if (this.raceService.raceDuration > 180) {
       const timeOverEvent = this.raceEventService.raceEventTypes.find(event => {
         return event.code === 'TIME_EVENT';
       });
@@ -79,6 +80,7 @@ export class RaceComponent implements OnInit, OnDestroy {
         timeOverEvent.name
       );
     }
+    this.raceService.endRaceForActivePilot();
   }
 
   ngOnDestroy(): void {

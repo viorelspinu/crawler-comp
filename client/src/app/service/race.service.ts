@@ -18,6 +18,8 @@ export class RaceService {
   points = 0;
   activePilot: Pilot;
   raceIndex = 0;
+  activeRaceId = 0;
+  raceDuration = 0;
 
   raceUrl = '/api/race';
 
@@ -67,6 +69,23 @@ export class RaceService {
     this.activePilot.lastRaceIndex = this.activePilot.lastRaceIndex + 1;
     this.pilotService
       .updatePilotTryCount(this.activePilot.id, this.activePilot.lastRaceIndex)
+      .subscribe();
+
+    this.http
+      .post<number>(this.raceUrl, {
+        index: this.activePilot.lastRaceIndex,
+        tournamentId: this.tournamentService.activeTournament.id,
+        pilotId: this.activePilot.id
+      })
+      .subscribe(raceId => (this.activeRaceId = raceId));
+  }
+
+  endRaceForActivePilot(): void {
+    this.http
+      .patch<number>(this.raceUrl + '/' + this.activeRaceId, {
+        duration: this.raceDuration,
+        points: this.points
+      })
       .subscribe();
   }
 }
