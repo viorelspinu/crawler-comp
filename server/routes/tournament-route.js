@@ -13,21 +13,15 @@ module.exports = {
         }
       );
 
-      const promise2 = models.sequelize.query(
-        'SELECT SUM(t.points) as totalPoints, e.race_index AS raceIndex FROM race_event e, race_event_type t WHERE (e.race_event_type_id=t.id) AND (pilot_id=:pilotId) GROUP BY race_index ORDER BY race_index',
-        {
-          replacements: { pilotId: pilotId },
-          type: models.sequelize.QueryTypes.SELECT
-        }
-      );
+      const promise2 = models.Race.findAll({
+        where: { pilotId: pilotId },
+        order: [['index', 'ASC']]
+      });
 
-      const promise3 = models.sequelize.query(
-        'SELECT SUM(t.points) as totalPoints, e.race_index as raceIndex FROM race_event e, race_event_type t WHERE (e.race_event_type_id=t.id) AND (pilot_id=:pilotId) GROUP BY race_index ORDER BY totalPoints ASC LIMIT 1',
-        {
-          replacements: { pilotId: pilotId },
-          type: models.sequelize.QueryTypes.SELECT
-        }
-      );
+      const promise3 = models.Race.findOne({
+        where: { pilotId: pilotId },
+        order: [['points', 'ASC']]
+      });
 
       models.sequelize.Promise.join(promise1, promise2, promise3, function(
         result1,
@@ -41,8 +35,10 @@ module.exports = {
         result2.pilotId = pilotId;
         returnObj.raceTotals = result2;
 
-        returnObj.bestRaceIndex = result3[0].raceIndex;
-        returnObj.bestRacePoints = result3[0].totalPoints;
+        console.log(result3);
+
+        returnObj.bestRaceIndex = result3.index;
+        returnObj.bestRacePoints = result3.points;
 
         res.send(returnObj);
       });

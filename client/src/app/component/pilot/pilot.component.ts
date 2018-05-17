@@ -41,7 +41,6 @@ export class PilotComponent implements OnInit {
       this.tournamentService
         .getPilotTournamentEvents(this.pilot.id)
         .subscribe(results => {
-          console.log(results);
           this.rawPilotRaceEvents = results.raceEvents;
           this.resultsTotal = results.raceTotals;
           this.bestRaceIndex = results.bestRaceIndex;

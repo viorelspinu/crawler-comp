@@ -33,7 +33,6 @@ export class TournamentComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.tournamentService.getTournament(id).subscribe(t => {
       this.tournamentService.activeTournament = t;
-      console.log(t);
       this.pilotService.getPilots(id).subscribe(pilots => {
         this.pilots = pilots;
       });
@@ -42,7 +41,6 @@ export class TournamentComponent implements OnInit {
 
   endTournament(): void {
     this.tournamentService.endActiveTournament().subscribe(any => {
-      console.log('now init');
       this.init();
     });
   }
