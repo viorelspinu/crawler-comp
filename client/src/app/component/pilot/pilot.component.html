@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!results">
+<div class="container" *ngIf="!pilotTournamentResult">
   <h2 class="card-title mt-4 mb-4" *ngIf="pilot">
     No races yet for
     <b>{{pilot.name}}</b>
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="container" *ngIf="results">
+<div class="container" *ngIf="pilotTournamentResult">
 
   <div class='clearfix'>
     <a *ngIf="tournamentService.activeTournament" class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
@@ -25,10 +25,10 @@
       <div class='clearfix'>
         <h4>
           <div class='float-left'>
-            Best : race {{bestRaceIndex}}
+            Best : race {{pilotTournamentResult.bestRaceIndex}}
           </div>
           <div class='float-right'>
-            Best total points : {{bestRacePoints}}
+            Best total points : {{pilotTournamentResult.bestRacePoints}}
           </div>
         </h4>
       </div>
@@ -37,13 +37,13 @@
 
   <div class='mt-3'>
 
-    <div class="card mt-4" *ngFor='let resultList of results;let i=index;'>
-      <div [class.green]="resultsTotal[i].finished==='0'" class="card-body">
+    <div class="card mt-4" *ngFor='let raceResult of pilotTournamentResult.raceTotals'>
+      <div [class.green]="raceResult.finished==='0'" class="card-body">
         <h5 class='mb-4 card-title'>
           <div class='clearfix'>
             <div class='float-left'>
-              Race {{resultsTotal[i].index}}
-              <span *ngIf='resultsTotal[i].finished === "0" '>
+              Race {{raceResult.index}}
+              <span *ngIf='raceResult.finished === "0" '>
                 (still in progress)
                 <button (click)="loadData()" class='mt-3 btn btn-secondary mb-3'>
                   refresh
@@ -51,7 +51,7 @@
               </span>
             </div>
             <div class='float-right'>
-              Total points : {{resultsTotal[i].points}}
+              Total points : {{raceResult.points}}
             </div>
           </div>
         </h5>
@@ -69,7 +69,7 @@
             </th>
           </thead>
           <tbody>
-            <tr *ngFor='let event of resultList'>
+            <tr *ngFor='let event of filterEvents(raceResult.index)'>
               <td>
                 {{event.seconds}}
               </td>
