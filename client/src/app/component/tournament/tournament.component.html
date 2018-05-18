@@ -20,6 +20,7 @@
         <tr>
           <th>Name</th>
           <th>Races</th>
+          <th>Best Score</th>
           <th *ngIf="!tournamentService.activeTournament.finished"></th>
         </tr>
       </thead>
@@ -29,11 +30,12 @@
             <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
               {{pilot.name}}
             </a>
-
-
           </td>
           <td>
             {{pilot.lastRaceIndex}}
+          </td>
+          <td>
+            {{pilot.bestScore}}
           </td>
 
           <td *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)">

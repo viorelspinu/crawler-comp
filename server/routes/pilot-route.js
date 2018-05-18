@@ -1,7 +1,5 @@
-
 module.exports = {
   configure: function(app) {
-
     const models = app.get('models');
 
     app.get('/api/pilot/:id', function(req, res) {
@@ -22,7 +20,23 @@ module.exports = {
           order: [['lastRaceIndex', 'ASC']]
         })
         .then(pilots => {
-          res.json(pilots);
+          const selectRacePromises = pilots.map(pilot => {
+            return models.Race.findOne({
+              where: { pilotId: pilot.id },
+              order: [['points', 'ASC']]
+            });
+          });
+
+          models.sequelize.Promise.all(selectRacePromises).then(races => {
+            races.map(race => {
+              var pilot = pilots.find(p => {
+                return p.id === race.pilotId;
+              });
+              pilot.dataValues.bestScore = race.points;
+            });
+
+            res.json(pilots);
+          });
         })
         .catch(err => {
           console.log(err);

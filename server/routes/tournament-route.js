@@ -21,36 +21,36 @@ module.exports = {
         order: [['points', 'ASC']]
       });
 
-      models.sequelize.Promise.join(promise1, promise2, promise3, function(
-        result1,
-        result2,
-        result3
-      ) {
-        let rawResults = [];
+      models.sequelize.Promise
+        .join(promise1, promise2, promise3, function(
+          result1,
+          result2,
+          result3
+        ) {
+          const rawResults = result1.map(item => {
+            let rawResult = new Object();
+            rawResult.name = item.RaceEventType.name;
+            rawResult.points = item.RaceEventType.points;
+            rawResult.raceIndex = item.dataValues.raceIndex;
+            rawResult.seconds = item.dataValues.seconds;
+            return rawResult;
+          });
 
-        result1.forEach(item => {
-          let rawResult = new Object();
+          let returnObj = new Object();
+          returnObj.pilotId = pilotId;
+          returnObj.raceEvents = rawResults;
 
-          rawResult.name = item.RaceEventType.name;
-          rawResult.points = item.RaceEventType.points;
-          rawResult.raceIndex = item.dataValues.raceIndex;
-          rawResult.seconds = item.dataValues.seconds;
+          result2.pilotId = pilotId;
+          returnObj.raceTotals = result2;
 
-          rawResults.push(rawResult);
+          returnObj.bestRaceIndex = result3.index;
+          returnObj.bestRacePoints = result3.points;
+
+          res.json(returnObj);
+        })
+        .catch(err => {
+          console.log(err);
         });
-
-        let returnObj = new Object();
-        returnObj.pilotId = pilotId;
-        returnObj.raceEvents = rawResults;
-
-        result2.pilotId = pilotId;
-        returnObj.raceTotals = result2;
-
-        returnObj.bestRaceIndex = result3.index;
-        returnObj.bestRacePoints = result3.points;
-
-        res.json(returnObj);
-      });
     });
 
     app.get('/api/tournament/:id', function(req, res) {
