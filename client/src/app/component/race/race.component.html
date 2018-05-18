@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div class="card mt-2" *ngIf="raceStarted">
+<div class="card mt-2" *ngIf="raceStarted && !raceFinished">
     <div class="card-body">
         <div class='mt-1 text-center'>
             <div *ngFor='let raceEvent of raceEventService.raceEventTypes; '>

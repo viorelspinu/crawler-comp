@@ -35,6 +35,10 @@ export class PilotComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData():void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.pilotService.getPilotById(id).subscribe(pilot => {
       this.pilot = pilot;

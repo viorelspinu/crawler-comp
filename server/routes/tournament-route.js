@@ -1,19 +1,19 @@
 module.exports = {
-  configure: function(app) {
+  configure: function (app) {
     const models = app.get('models');
 
-    app.get('/api/tournament/results', function(req, res) {
+    app.get('/api/tournament/results', function (req, res) {
       const pilotId = +req.query.pilotId;
 
       const promise1 = models.RaceEvent.findAll({
         where: { pilotId: pilotId },
         include: [models.RaceEventType],
-        order: [['raceIndex', 'ASC'], ['seconds', 'ASC']]
+        order: [['raceIndex', 'DESC'], ['seconds', 'ASC']]
       });
 
       const promise2 = models.Race.findAll({
         where: { pilotId: pilotId },
-        order: [['index', 'ASC']]
+        order: [['index', 'DESC']]
       });
 
       const promise3 = models.Race.findOne({
@@ -22,7 +22,7 @@ module.exports = {
       });
 
       models.sequelize.Promise
-        .join(promise1, promise2, promise3, function(
+        .join(promise1, promise2, promise3, function (
           result1,
           result2,
           result3
@@ -53,7 +53,7 @@ module.exports = {
         });
     });
 
-    app.get('/api/tournament/:id', function(req, res) {
+    app.get('/api/tournament/:id', function (req, res) {
       models.Tournament
         .findById(req.params.id)
         .then(t => {
@@ -64,7 +64,7 @@ module.exports = {
         });
     });
 
-    app.get('/api/tournament', function(req, res) {
+    app.get('/api/tournament', function (req, res) {
       models.Tournament
         .findAll({
           order: [['createDate', 'ASC']]
@@ -77,7 +77,7 @@ module.exports = {
         });
     });
 
-    app.post('/api/tournament', function(req, res) {
+    app.post('/api/tournament', function (req, res) {
       const tournament = models.Tournament
         .create({
           name: req.body.tournamentName,
@@ -91,7 +91,7 @@ module.exports = {
         });
     });
 
-    app.post('/api/tournament/end', function(req, res) {
+    app.post('/api/tournament/end', function (req, res) {
       models.Tournament
         .update(
           { finished: true },

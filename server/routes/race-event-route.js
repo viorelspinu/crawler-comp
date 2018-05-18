@@ -1,8 +1,8 @@
 module.exports = {
-  configure: function(app) {
+  configure: function (app) {
     const models = app.get('models');
 
-    app.get('/api/race-event-type', function(req, res) {
+    app.get('/api/race-event-type', function (req, res) {
       models.RaceEventType
         .findAll()
         .then(t => {
@@ -13,7 +13,7 @@ module.exports = {
         });
     });
 
-    app.post('/api/race-event', function(req, res) {
+    app.post('/api/race-event', function (req, res) {
       const raceEvent = models.RaceEvent
         .create({
           raceEventTypeId: req.body.raceEventTypeId,
@@ -25,6 +25,36 @@ module.exports = {
         })
         .then(raceEvent => {
           res.json(raceEvent.id);
+        }).then(function () {
+          models.RaceEvent.find({
+            attributes: [
+              [models.sequelize.fn('SUM', models.sequelize.col('RaceEventType.points')), 'totalPoints']
+            ],
+            where: {
+              raceIndex: req.body.raceId,
+              pilotId: req.body.pilotId
+            },
+            include: [models.RaceEventType]
+          }).then(rows => {
+            const totalPoints = rows.dataValues.totalPoints;
+            models.Race.find(
+              {
+                where: {
+                  index: req.body.raceId,
+                  pilotId: req.body.pilotId
+                }
+              }).then(race => {
+                race.duration = req.body.seconds;
+                race.points = totalPoints;
+                console.log(race.dataValues.id);
+                race.save().then(() => {
+                  console.log('saved');
+                }).catch(error => {
+                  console.log(error);
+                });
+              });
+          });
+
         })
         .catch(err => {
           console.log(err);

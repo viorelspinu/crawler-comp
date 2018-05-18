@@ -38,11 +38,17 @@
   <div class='mt-3'>
 
     <div class="card mt-4" *ngFor='let resultList of results;let i=index;'>
-      <div class="card-body">
+      <div [class.green]="resultsTotal[i].finished==='0'" class="card-body">
         <h5 class='mb-4 card-title'>
           <div class='clearfix'>
             <div class='float-left'>
               Race {{resultsTotal[i].index}}
+              <span *ngIf='resultsTotal[i].finished=== "0" '>
+                (still in progress)
+                <button (click)="loadData()" class='mt-3 btn btn-secondary mb-3'>
+                  refresh
+                </button>
+              </span>
             </div>
             <div class='float-right'>
               Total points : {{resultsTotal[i].points}}
