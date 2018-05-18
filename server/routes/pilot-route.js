@@ -29,11 +29,13 @@ module.exports = {
 
           models.sequelize.Promise.all(selectRacePromises).then(races => {
             races.map(race => {
-              var pilot = pilots.find(p => {
-                return p.id === race.pilotId;
-              });
-              pilot.dataValues.bestScore = race.points;
-              pilot.dataValues.bestDuration = race.duration;
+              if (race) {
+                var pilot = pilots.find(p => {
+                  return p.id === race.pilotId;
+                });
+                pilot.dataValues.bestScore = race.points;
+                pilot.dataValues.bestDuration = race.duration;
+              }
             });
 
             if (req.query.sortOnScore) {
