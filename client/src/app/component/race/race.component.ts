@@ -85,6 +85,7 @@ export class RaceComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubscribeClock();
+    console.log('ondestroy');
   }
 
   unsubscribeClock(): void {

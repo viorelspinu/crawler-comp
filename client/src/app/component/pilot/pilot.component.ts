@@ -66,7 +66,7 @@ export class PilotComponent implements OnInit {
     this.results = [];
 
     let i = 0;
-    let raceIndex = this.rawPilotRaceEvents[0].raceIndex;
+    let raceIndex = this.resultsTotal[0].raceIndex;
     this.results[0] = [];
 
     for (const event of this.rawPilotRaceEvents) {
