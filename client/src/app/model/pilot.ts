@@ -3,6 +3,7 @@ export class Pilot {
   name: string;
   lastRaceIndex: number;
   bestScore: number;
+  bestDuration: number;
 
   constructor(id: number, name: string, lastRaceIndex: number) {
     this.id = id;

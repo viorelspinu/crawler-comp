@@ -20,13 +20,25 @@
         <tr>
           <th>Name</th>
           <th>Races</th>
-          <th>Best Score</th>
+          <th>Points</th>
+          <th>Seconds</th>
           <th *ngIf="!tournamentService.activeTournament.finished"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let pilot of pilots'>
+        <tr *ngFor='let pilot of pilots;let i=index;'>
           <td>
+            <span *ngIf="tournamentService.activeTournament.finished">
+              <span *ngIf="i === 0">
+                <img src="assets/img/gold.jpg" class='mr-4'>
+              </span>
+              <span *ngIf="i === 1">
+                  <img src="assets/img/silver.jpg" class='mr-4'>
+              </span>
+              <span *ngIf="i === 2">
+                  <img src="assets/img/bronze.jpg" class='mr-4'>
+              </span>
+            </span>
             <a class='btn btn-link' routerLink="/pilot/{{pilot.id}}">
               {{pilot.name}}
             </a>
@@ -37,6 +49,10 @@
           <td>
             {{pilot.bestScore}}
           </td>
+          <td>
+            {{pilot.bestDuration}}
+          </td>
+
 
           <td *ngIf="tournamentService.isAdmin() && (!tournamentService.activeTournament.finished)">
             <button class='btn btn-light' (click)="raceService.viewStartRaceForPilot(pilot.id)">Race</button>

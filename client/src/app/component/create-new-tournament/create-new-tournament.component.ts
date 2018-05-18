@@ -25,7 +25,7 @@ export class CreateNewTournamentComponent implements OnInit {
     public tournamentService: TournamentService,
     public raceService: RaceService,
     public renderer2: Renderer2
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.init();
@@ -35,7 +35,7 @@ export class CreateNewTournamentComponent implements OnInit {
     if (this.tournamentService.activeTournament) {
       this.newTournamentCreated = 1;
       this.pilotService
-        .getPilots(this.tournamentService.activeTournament.id)
+        .getPilots(this.tournamentService.activeTournament.id, 0)
         .subscribe(pilots => {
           this.pilots = pilots;
         });
