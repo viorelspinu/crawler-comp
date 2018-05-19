@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { mergeMap } from 'rxjs/operators';
+
 
 import { PilotService } from '../../service/pilot.service';
 import { TournamentService } from '../../service/tournament.service';
@@ -32,14 +34,14 @@ export class PilotComponent implements OnInit {
 
   loadData(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.pilotService.getPilotById(id).subscribe(pilot => {
-      this.pilot = pilot;
-      this.tournamentService
-        .getPilotTournamentEvents(this.pilot.id)
-        .subscribe(results => {
-          this.pilotTournamentResult = results;
-        });
-    });
+
+    this.pilotService.getPilotById(id).pipe(
+      mergeMap(pilot => {
+        this.pilot = pilot;
+        return this.tournamentService.getPilotTournamentEvents(this.pilot.id);
+      })).subscribe(
+        results => { this.pilotTournamentResult = results }
+      );
   }
 
   filterEvents(raceIndex: number): PilotRaceEvent[] {

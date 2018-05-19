@@ -19,7 +19,7 @@ export class PilotService {
     this.pilotsUrl = configurationService.baseURL + this.pilotsUrl;
   }
 
-  getPilots(tournamentId: number, sortType:number): Observable<Pilot[]> {
+  getPilots(tournamentId: number, sortType: number): Observable<Pilot[]> {
     let url = this.pilotsUrl + '?tournamentId=' + tournamentId;
     if (sortType === 1) {
       url = url + "&sortOnScore=1";
@@ -37,15 +37,6 @@ export class PilotService {
     return this.http.post<number>(this.pilotsUrl, {
       pilotName: pilotName,
       tournamentId: tournamentId
-    });
-  }
-
-  updatePilotTryCount(
-    pilotId: number,
-    lastRaceIndex: number
-  ): Observable<number> {
-    return this.http.patch<number>(this.pilotsUrl + '/' + pilotId, {
-      lastRaceIndex: lastRaceIndex
     });
   }
 }

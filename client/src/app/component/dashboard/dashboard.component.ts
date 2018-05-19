@@ -17,10 +17,10 @@ export class DashboardComponent implements OnInit {
     public tournamentService: TournamentService,
     public location: Location,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
-    // force to HTTP, as the server on Amazon does not have HTTS
+    // force to HTTP, as the server on Amazon does not have HTTPS, for now
     if (location.protocol === 'https:') {
       location.protocol = 'http';
     }
@@ -34,13 +34,8 @@ export class DashboardComponent implements OnInit {
 
   loadTournaments(): void {
     this.tournamentService.getTournaments().subscribe(tournaments => {
-      for (const tournament of tournaments) {
-        if (tournament.finished) {
-          this.closedTournaments.push(tournament);
-        } else {
-          this.inProgressTournaments.push(tournament);
-        }
-      }
+      this.closedTournaments = tournaments.filter(tournament => { return tournament.finished });
+      this.inProgressTournaments = tournaments.filter(tournament => { return !tournament.finished });
     });
   }
 }

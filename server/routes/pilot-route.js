@@ -39,7 +39,6 @@ module.exports = {
             });
 
             if (req.query.sortOnScore) {
-              console.log('sort on score');
               pilots.sort(function (a, b) {
                 return (a.dataValues.bestScore - b.dataValues.bestScore) * 1000
                   + (a.dataValues.bestDuration - b.dataValues.bestDuration)
@@ -63,24 +62,6 @@ module.exports = {
         })
         .then(pilot => {
           res.json(pilot.id);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
-
-    app.patch('/api/pilot/:id', function (req, res) {
-      models.Pilot
-        .update(
-          { lastRaceIndex: req.body.lastRaceIndex },
-          {
-            where: {
-              id: req.params.id
-            }
-          }
-        )
-        .then(p => {
-          res.json(p.id);
         })
         .catch(err => {
           console.log(err);
