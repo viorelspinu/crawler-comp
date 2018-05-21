@@ -14,6 +14,7 @@ module.exports = {
     });
 
     app.get('/api/pilot', function (req, res) {
+      
       models.Pilot
         .findAll({
           where: { tournamentId: req.query.tournamentId },

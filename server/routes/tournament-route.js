@@ -64,7 +64,11 @@ module.exports = {
         });
     });
 
-    app.get('/api/tournament', function (req, res) {
+    app.get('/api/tournament', async function (req, res) {
+
+      const response = await models.Tournament.findAll();
+      console.log(response[0].name);
+
       models.Tournament
         .findAll({
           order: [['createDate', 'ASC']]
