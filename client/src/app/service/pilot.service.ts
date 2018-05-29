@@ -22,11 +22,9 @@ export class PilotService {
   getPilots(tournamentId: number, sortType: number): Observable<Pilot[]> {
     let url = this.pilotsUrl + '?tournamentId=' + tournamentId;
     if (sortType === 1) {
-      url = url + "&sortOnScore=1";
+      url = url + '&sortOnScore=1';
     }
-    return this.http.get<Pilot[]>(
-      url
-    );
+    return this.http.get<Pilot[]>(url);
   }
 
   getPilotById(pilotId: number): Observable<Pilot> {

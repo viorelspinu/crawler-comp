@@ -83,9 +83,16 @@ export class RaceComponent implements OnInit, OnDestroy {
     this.raceService.endRaceForActivePilot();
   }
 
+  deleteRace(): void {
+    this.raceService.deleteCurrentRace().subscribe(raceId => {
+      this.router.navigateByUrl(
+        '/tournament/' + this.tournamentService.activeTournament.id
+      );
+    });
+  }
+
   ngOnDestroy(): void {
     this.unsubscribeClock();
-    console.log('ondestroy');
   }
 
   unsubscribeClock(): void {

@@ -67,7 +67,7 @@ export class RaceService {
 
   startRaceForActivePilot(): void {
     this.activePilot.lastRaceIndex = this.activePilot.lastRaceIndex + 1;
-    
+
     this.http
       .post<number>(this.raceUrl, {
         index: this.activePilot.lastRaceIndex,
@@ -84,5 +84,9 @@ export class RaceService {
         points: this.points
       })
       .subscribe();
+  }
+
+  deleteCurrentRace(): Observable<number> {
+    return this.http.delete<number>(this.raceUrl + '/' + this.activeRaceId);
   }
 }

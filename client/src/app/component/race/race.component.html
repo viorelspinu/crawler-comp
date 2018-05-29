@@ -92,3 +92,8 @@
         <a class='btn btn-secondary mt-4 mb-4 float-right' routerLink="/tournament/{{tournamentService.activeTournament.id}}">Back to tournament</a>
     </div>
 </div>
+
+<button *ngIf="raceStarted && raceFinished" mwlConfirmationPopover class="btn btn-link" [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage"
+    placement="top" (confirm)="deleteRace()">
+    Delete this race
+</button>
